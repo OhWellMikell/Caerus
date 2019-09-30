@@ -794,6 +794,163 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 	}
 
+	if(isNaN(keyword) == false){
+
+		// Local Variables
+		let stat = args.shift();
+		if(stat) stat.toLowerCase().trim();
+
+		// Error Traps
+		if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
+			return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet** ***roll***`);
+
+		}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
+			return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet** ***save***`);
+
+		}else if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == true || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == true){
+			return message.reply(`\n>>> You have assigned all your ability scores.` +
+				`\nIf you'd like to re-arrange them you can return them to your hand with **/sheet** ***reset***.` +
+				`\nIf you like where they are and would like to save them. Type **/sheet** ***lock***.`);
+
+		}else if(!stat || stat == ``){
+			return message.reply(`\n>>> You didn't specify which ability you're selecting for the score.` +
+			` Choose the ability with **/sheet** ***[score] [ability]***\n` +
+			` For example, **/sheet** ***12 dex***`);
+		}
+
+		// If the Number specified is in the list of scores
+		if(campFiles.get(`${campaign}.${player}.scores`).includes(Number(keyword))){
+
+			// Local variables
+			let strength     = [`str`,`strength`];
+			let dexterity    = [`dex`,`dexterity`];
+			let constitution = [`con`,`constitution`];
+			let intelligence = [`int`,`intelligence`];
+			let wisdom       = [`wis`,`wisdom`];
+			let charisma     = [`cha`,`charisma`];
+			let index_num;
+			let update;
+
+			// Check which stat has been specified. Assign the keyword as the stat.
+			if(strength.includes(stat)){
+
+				// Check if there isnt already a number occupying the stat.
+				if(campFiles.get(`${campaign}.${player}.strength[0]`) > 0){
+					return message.reply(`\n>>> There is already a score placed in strength.` +
+						` You can call back your scores with **/sheet** ***reset***.`);
+
+				}
+
+				// Check for the index of the number, update the player profile and splice out the roll.
+				index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == keyword);
+				campFiles.set(`${campaign}.${player}.strength[0]`, Number(keyword));
+				update = campFiles.get(`${campaign}.${player}.scores`);
+				update.splice(index_num, 1);
+				campFiles.set(`${campaign}.${player}.scores`, update);
+
+				// Prompt the player that the stat has been assigned
+				return message.reply(`\n>>> ${keyword} has been assigned to strength.`);
+			}else if(dexterity.includes(stat)){
+
+				// Check if there isnt already a number occupying the stat.
+				if(campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0){
+					return message.reply(`\n>>> There is already a score placed in dexterity.` +
+						` You can call back your scores with **/sheet** ***reset***.`);
+
+				}
+
+				// Check for the index of the number, update the player profile and splice out the roll.
+				index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == keyword);
+				campFiles.set(`${campaign}.${player}.dexterity[0]`, Number(keyword));
+				update = campFiles.get(`${campaign}.${player}.scores`);
+				update.splice(index_num, 1);
+				campFiles.set(`${campaign}.${player}.scores`, update);
+
+				// Prompt the player the the stat has been assigned.
+				return message.reply(`\n>>> ${keyword} has been assigned to dexterity.`);
+			}else if(constitution.includes(stat)){
+
+				// Check if there isnt already a number occupying the stat.
+				if(campFiles.get(`${campaign}.${player}.constitution[0]`) > 0){
+					return message.reply(`\n>>> There is already a score placed in ${stat}.` +
+						` You can call back your scores with **/sheet** ***reset***.`);
+
+				}
+
+				// Check for the index of the number, update the player profile and splice out the roll.
+				index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == keyword);
+				campFiles.set(`${campaign}.${player}.constitution[0]`, Number(keyword));
+				update = campFiles.get(`${campaign}.${player}.scores`);
+				update.splice(index_num, 1);
+				campFiles.set(`${campaign}.${player}.scores`, update);
+
+				// Prompt the player that the stat has been assigned
+				return message.reply(`\n>>> ${keyword} has been assigned to constitution.`);
+			}else if(intelligence.includes(stat)){
+
+				// Check if there isnt already a number occupying the stat.
+				if(campFiles.get(`${campaign}.${player}.intelligence[0]`) > 0){
+					return message.reply(`\n>>> There is already a score placed in intelligence.` +
+						` You can call back your scores with **/sheet** ***reset***.`);
+
+				}
+
+				// Check for the index of the number, update the player profile and splice out the roll.
+				index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == keyword);
+				campFiles.set(`${campaign}.${player}.intelligence[0]`, Number(keyword));
+				update = campFiles.get(`${campaign}.${player}.scores`);
+				update.splice(index_num, 1);
+				campFiles.set(`${campaign}.${player}.scores`, update);
+
+				// Prompt the player that the stat has been assigned
+				return message.reply(`\n>>> ${keyword} has been assigned to intelligence.`);
+			}else if(wisdom.includes(stat)){
+
+				// Check if there isnt already a number occupying the stat.
+				if(campFiles.get(`${campaign}.${player}.wisdom[0]`) > 0){
+					return message.reply(`\n>>> There is already a score placed in wisdom.` +
+						` You can call back your scores with **/sheet** ***reset***.`);
+
+				}
+
+				// Check for the index of the number, update the player profile and splice out the roll.
+				index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == keyword);
+				campFiles.set(`${campaign}.${player}.wisdom[0]`, Number(keyword));
+				update = campFiles.get(`${campaign}.${player}.scores`);
+				update.splice(index_num, 1);
+				campFiles.set(`${campaign}.${player}.scores`, update);
+				return message.reply(`\n>>> ${keyword} has been assigned to wisdom.`);
+			}else if(charisma.includes(stat)){
+
+				// Check if there isnt already a number occupying the stat.
+				if(campFiles.get(`${campaign}.${player}.charisma[0]`) > 0){
+					return message.reply(`\n>>> There is already a score placed in charisma.` +
+						` You can call back your scores with **/sheet** ***reset***.`);
+
+				}
+
+				// Check for the index of the number, update the player profile and splice out the roll.
+				index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == keyword);
+				campFiles.set(`${campaign}.${player}.charisma[0]`, Number(keyword));
+				update = campFiles.get(`${campaign}.${player}.scores`);
+				update.splice(index_num, 1);
+				campFiles.set(`${campaign}.${player}.scores`, update);
+
+				// Prompt the player that the stat has been assigned.
+				return message.reply(`\n>>> ${keyword} has been assigned to charisma.`);
+			}else{
+
+				// Prompt the player that the stat typed is not an ability for points to be placed in.
+				return message.reply(`\n>>> ${stat} is not an ability to place your points in.`);
+			}
+
+		}else{
+			return message.reply(`\n>>> ${keyword} is not one of your rolled scores.`);
+
+		}
+
+	}
+
 	if(keyword == `lock`){
 		// Its a code block
 	}
