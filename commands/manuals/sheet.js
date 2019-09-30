@@ -715,14 +715,74 @@ exports.run = async (Discord, bot, config, message, args) => {
 	}
 
 	if(keyword == `roll`){
-		// Its a code block
+
+		// Local variables
+		let rolls  = new Array(3);
+		let scores = new Array(5);
+		let sum    = (accu, curVal) => accu + curVal;
+		let num    = 0;
+		let result = 0;
+		let string = ``;
+
+		// Error Traps
+		if(campFiles.get(`${campaign}.${player}.scoressaved`) == true){
+			return message.reply(`\n>>> You saved your ability scores already.`);
+		}
+		if(campFiles.get(`${campaign}.${player}.rolls`) <= 0){
+			return message.reply(`\n>>> You maxed out your retries on rolling ability scores.`);
+		}
+
+		// For six times...
+		for(let i = 0; i < 6; i++){
+
+			// For four times...
+			for(let j = 0; j < 4; j++){
+
+				// Generate a number between 1-6
+				num = Math.floor(Math.random() * 6) + 1;
+				rolls[j] = num;
+
+			}
+
+			// Add the numbers and subtract the lowest
+			result = rolls.reduce(sum) - Math.min(...rolls);
+
+			// Make the i'th cell for scores the line of numbers
+			scores[i] = result;
+			string += `${rolls.join(`, `).padEnd(14, ` `)}${result}\n`;
+
+			// On the 6th iteration, check to see if the average total is higher than ten
+			if(i == 5){
+				if(Math.floor(scores.reduce(sum)/scores.length) <= 9){
+					return message.reply(`\n>>> Yikes.\nYou rolled commoner stats.` +
+					`\nCommoner stats don't count.\nRoll again.\n\nBad Batch:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
+				}
+			}
+		}
+
+		// Update the amount of times the player rolled,and set their result as their current scores.
+		campFiles.subtract(`${campaign}.${player}.rolls`, 1);
+		campFiles.set(`${campaign}.${player}.scores`, scores);
+
+		// Prompt the player their results
+		message.reply(`\n>>> You rolled these numbers:\`\`\`css\n${string}\`\`\`\nGiving you:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
+
+		// Prompt the player depending on their remaining rolls wether or not they'd like to save or roll again.
+		if(campFiles.get(`${campaign}.${player}.rolls`) > 0){
+			return message.reply(`\n>>> Don't like your numbers?\nYou can choose to sacrifice this set and try` +
+			` ${campFiles.get(`${campaign}.${player}.rolls`)} more time(s). Be careful though, as there are no take-backsies.` +
+			`\nIf you *do* like your numbers however, be sure to type **/sheet** ***save*** so that you can move on and assign the numbers.`);
+		}
+		if(campFiles.get(`${campaign}.${player}.rolls`) <= 0){
+			return message.reply(`\n>>> You have run out of retries, the set you have rolled is now what you get!` +
+				` Type **/sheet** ***save*** to be able to move on and assign the numbers.` +
+				`\nOr....avoid the inevitable, abandon the character sheet and never look back again.\n\n:runner::skin-tone-3:`);
+		}
+
+		return;
 	}
 
 	if(keyword == `save`){
-		// Its a code block
-	}
-
-	if(keyword == `roll`){
 		// Its a code block
 	}
 
