@@ -783,7 +783,15 @@ exports.run = async (Discord, bot, config, message, args) => {
 	}
 
 	if(keyword == `save`){
-		// Its a code block
+
+		// If player scores is not blank then set scoressaved to true
+		if(campFiles.get(`${campaign}.${player}.scores`) == undefined || campFiles.get(`${campaign}.${player}.scores`).length < 6){
+			return message.reply(`\n>>> You dont have a set of ability scores to save.`);
+		}else{
+			campFiles.set(`${campaign}.${player}.scoressaved`, true);
+			return message.reply(`\n>>> Your ability scores have been saved.`)
+		}
+
 	}
 
 	if(keyword == `lock`){
