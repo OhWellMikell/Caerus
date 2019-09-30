@@ -1,0 +1,65 @@
+{
+  "lawful good": {
+		"name": "Lawful Good",
+    "description": "The Lawful Good can be counted on to do the right thing as expected by society.",
+		"ally": "Lawful Good are typically fond of those that are Neutral Good and Lawful Neutral.",
+		"apathetic": "Lawful Good are indifferent about those that are Neutral, Chaotic Good and Lawful Evil.",
+		"ememies": "Lawful Good typically cannot get along with Neutral Evil, Chaotic Neutral and Chaotic Evil and in most cases, hate them."
+  },
+	"neutral good": {
+		"name": "Neutral Good",
+    "description": "The Neutral Good do the best they can to help others according to their needs. ",
+		"ally": "Neutral Good are typically fond of those that are Lawful Good, Neutral and Chaotic Good.",
+		"apathetic": "Neutral Good are indifferent about those that are Lawful Neutral and Chaotic Neutral.",
+		"ememies": "Neutral Good typically cannot get along with Lawful Evil, Neutral Evil and Chaotic Evil and in most cases, hate them."
+  },
+	"chaotic good": {
+		"name": "Chaotic Good",
+    "description": "The Chaotic Good act as their guts and minds tell them, with little regard for what others expect.",
+		"ally": "Chaotic Good are typically fond of those that are Neutral Good and Chaotic Neutral.",
+		"apathetic": "Chaotic Good are indifferent about those that are Lawful Good, Neutral and Chaotic Evil.",
+		"ememies": "Chaotic Good typically cannot get along with Chaotic Neutral, Lawful Evil and Neutral EVil and in most cases, hate them."
+  },
+	"lawful neutral": {
+		"name": "Lawful Neutral",
+    "description": "Lawful Neutral individuals act in accordance with law, tradition, or personal codes.",
+		"ally": "Lawful Neutral are typically fond of those that are Lawful Good, Neutral and Lawful Evil.",
+		"apathetic": "Lawful Neutral are indifferent about those that are Neutral Good and Neutral EVil.",
+		"ememies": "Lawful Neutral typically cannot get along with Chaotic Good, Chaotic Neutral and Chaotic Evil and in most cases, hate them."
+  },
+	"true neutral": {
+		"name": "True Neutral",
+    "description": "True Neutral are those who prefer to steer clear of moral questions and don't take sides, they always do what seems right, if whats right isnt obvious they do what seems to have the least resistance.",
+		"ally": "True Neutral are typically fond of those that are Neutral Good, Chaotic Neutral, Neutral Evil and Lawful Neutral.",
+		"apathetic": "True Neutral are indifferent about those that are Lawful Good, Chaotic Good, Lawful Evil and Chaotic Evil.",
+		"ememies": "True Neutral does not have enough moral compass to despise any one particular morality"
+  },
+	"chaotic neutral": {
+		"name": "Chaotic Neutral",
+    "description": "Chaotic Neutral are those who follow their whims, holding their personal freedom above all else.",
+		"ally": "Chaotic Neutral are typically fond of those that are Chaotic Good, Neutral and Chaotic Evil.",
+		"apathetic": "Chaotic Neutral are indifferent about those that are Neutral Good and Neutral Evil.",
+		"ememies": "Chaotic Neutral typically cannot get along with Lawful Good, Lawful Neutral and Lawful Evil and in most cases, hate them."
+  },
+	"lawful evil": {
+		"name": "Lawful Evil",
+    "description": "Lawful Evil methodically take what they want, within the limits of a code of tradition, loyalty, or order.",
+		"ally": "Lawful Evil are typically fond of those that are Lawful Neutral and Neutral Evil.",
+		"apathetic": "Lawful Evil are indifferent about those that are Lawful Good, Neutral and Chaotic Evil.",
+		"ememies": "Lawful Evil typically cannot get along with Neutral Good, Chaotic Good and Chaotic Neutral and in most cases, hate them."
+  },
+	"neutral evil": {
+		"name": "Neutral Evil",
+    "description": "The Neutral Evil do whatever they can get away with, without compassion or qualms.",
+		"ally": "Neutral Evil are typically fond of those that are Lawful Evil, Neutral and Chaotic Evil.",
+		"apathetic": "Neutral Evil are indifferent about those that are Lawful Neutral and Chaotic Neutral.",
+		"ememies": "Neutral Evil typically cannot get along with Lawful Good, Neutral Good and Chaotic Good and in most cases, hate them."
+  },
+	"chaotic evil": {
+		"name": "Chaotic Evil",
+    "description": "The Chaotic Evil act with arbitrary violence, spurred by their greed, hatred, or bloodlust.",
+		"ally": "Chaotic Evil are typically fond of those that are Neutral Evil and Chaotic Neutral.",
+		"apathetic": "Chaotic Evil are indifferent about those that are Lawful Evil, Neutral and Chaotic Good.",
+		"ememies": "Chaotic Evil typically cannot get along with Lawful Neutral, Lawful Good and Neutral Good and in most cases, hate them."
+  }
+}

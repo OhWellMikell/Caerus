@@ -1,0 +1,20 @@
+{
+	"extends": "eslint:recommended",
+	"env": {
+		"node": true,
+		"es6": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018
+	},
+	"rules": {
+		"no-console": "off",
+		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
+		"no-trailing-spaces": ["error"],
+		"object-curly-spacing": ["error", "always"],
+		"quotes": ["error", "backtick"],
+		"space-before-blocks": ["error", "never"],
+		"spaced-comment": ["error", "always"],
+		"yoda": ["error", "never"]
+	}
+}

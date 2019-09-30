@@ -1,0 +1,65 @@
+{
+  "guardian": {
+		"name": "Guardian",
+    "description": "The Guardian believes that societies rules exist to protect weak and innocent. Therefore, order must be upheld to safeguard peace and prosperity. Although they often consider themselves belonging to some higher power, they will not act in ways which betray their principals or harm those they seek to protect.",
+		"ally": "Guardians are typically fond of those that are Altruists and Judges.",
+		"apathetic": "Guardians are indifferent about those that are Relativists, Liberators and Enforcers.",
+		"ememies": "Guardians typically cannot get along with Opportunists, Rebels and Marauders and in most cases, hate them."
+  },
+	"altruist": {
+		"name": "Altruist",
+    "description": "The Altruist is dedicated to maximizing the common good. Whether they are fighting for individuals rights or safeguarding society, Altruists are always perceptive to the welfare of others. They won’t hesitate to make personal sacrifices but are happy to compromise if it advances the common good.",
+		"ally": "Altruist are typically fond of those that are Guardians, Relativists and Liberators.",
+		"apathetic": "Altruist are indifferent about those that are Judges and Rebels.",
+		"ememies": "Altruist typically cannot get along with Enforcers, Opportunists and Marauders and in most cases, hate them."
+  },
+	"liberator": {
+		"name": "Liberator",
+    "description": "The Liberator does what is necessary to bring about a positive change for others. They place a high value on personal freedom, diversity, and equality. A Liberator’s need for social progress often puts them at odds with the status quo. Authority figures, entrenched interests, and traditionalists find them insufferable.",
+		"ally": "Liberators are typically fond of those that are Altruists and Rebels.",
+		"apathetic": "Liberators are indifferent about those that are Guardians, Relativists and Marauders.",
+		"ememies": "Liberators typically cannot get along with Rebels, Enforcers and Opportunists and in most cases, hate them."
+  },
+	"judge": {
+		"name": "Judge",
+    "description": "Judges are staunch authoritarians who adhere to codes, orders, or teachings of some organization or person, believing that duty, discipline, and honor are paramount to maintaining civilization. They will mercilessly enforce laws and carry out orders consistent with their loyalties and obligations.",
+		"ally": "Judges are typically fond of those that are Guardians, Relativists and Enforcers.",
+		"apathetic": "Judges are indifferent about those that are Altruists and Opportunists.",
+		"ememies": "Judges typically cannot get along with Liberators, Rebels and Marauders and in most cases, hate them."
+  },
+	"relativist": {
+		"name": "Relativist",
+    "description": "Relativists are non-ideological and tend not to feel strongly towards any particular ideological system, although they may adhere to one for practical reasons. When presented with hard choices they will usually take the path of least resistance. This is not out of cowardice but a belief that all things come and go.",
+		"ally": "Relativists are typically fond of those that are Altruists, Rebels, Opportunists and Judges.",
+		"apathetic": "Relativists are indifferent about those that are Guardians, Liberators, Enforcers and Marauders.",
+		"ememies": "Relativists are not partisan enough to despise any one particular ideology."
+  },
+	"rebel": {
+		"name": "Rebel",
+    "description": "Rebels are staunch individualists who are contemptuous of rules, obligations, and authority. They are prone to holding anarchic, fringe, or hedonistic beliefs. These characters tend to be impulsive and selfish, but they are generally fair towards others unless their freedom or security is challenged.",
+		"ally": "Rebels are typically fond of those that are Liberators, Relativists and Marauders.",
+		"apathetic": "Rebels are indifferent about those that are Altruists and Opportunists.",
+		"ememies": "Rebels typically cannot get along with Guardians, Judges and Enforcers and in most cases, hate them."
+  },
+	"enforcer": {
+		"name": "Enforcer",
+    "description": "Enforcers want to impose order on a chaotic universe. This might take the form of service to a powerful organization like government or authority, vigilantism, or simple obsession with power. The enforcer sees their actions as absolutely necessary, this make it easier for them to make hard choices and accumulate the power they need to see their goals realized.",
+		"ally": "Enforcers are typically fond of those that are Judges and Opportunists.",
+		"apathetic": "Enforcers are indifferent about those that are Guardians, Relativists and Marauders.",
+		"ememies": "Enforcers typically cannot get along with Altruists, Liberators and Rebels and in most cases, hate them."
+  },
+	"opportunist": {
+		"name": "Opportunist",
+    "description": "Opportunists believe that life is a game which should be played and won. Whether it's love, knowledge, wealth, or power they value, the opportunist is always hunting for the perfect opening to exploit any situation. These characters happily follow rules which benefit them but will easily cheat policies which don’t.",
+		"ally": "Opportunist are typically fond of those that are Enforcers, Relativists and Marauders.",
+		"apathetic": "Opportunist are indifferent about those that are Judges and Rebels.",
+		"ememies": "Opportunist typically cannot get along with Guardians, Altruists and Liberators and in most cases, hate them."
+  },
+	"marauder": {
+		"name": "Marauder",
+    "description": "Marauders see life as a cruel and relentless struggle. They learn to adapt by becoming meaner and tougher than the competition. Naturally suspicious of others, Marauders prefer to have the upper hand in every social interaction. They see authoritarians as predictable and the compassionate as naive.",
+		"ally": "Marauders are typically fond of those that are Opportunist and Rebels.",
+		"apathetic": "Marauders are indifferent about those that are Enforcers, Relativists and Liberators.",
+		"ememies": "Marauders typically cannot get along with Judges, Guardians and Altruists and in most cases, hate them."
+  }
+}

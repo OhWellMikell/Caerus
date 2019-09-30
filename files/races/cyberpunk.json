@@ -1,0 +1,41 @@
+{
+  "reaper": {
+		"name": "ReA:APer",
+    "scorebonus": ["dexterity+1","constitution+1","intelligence+1"],
+		"age": "Androids for aesthetics can choose to update their model along a humanesque timeline, receiving new bodies at periods of a typical maturity. Their lifetimes are indefinite as long as the quality of their main components such as their fusion core, computer processing unit, and LDS stay intact. Without human maitenance they would probably last an additional 350 years.",
+		"alignment": "Androids vary in alignment entirely depending on their make, model, assigned service and defect coefficient.",
+		"sizedesc": "Android models stand between 3 and 7 feet tall and average about 200 pounds. Your size is Medium",
+    "size": "Medium",
+		"speeddesc": "Your base movement speed is 30 feet. Your speed is not reduced by wearing heavy armor.",
+    "speed": 30,
+    "traits": ["Nightvision", "Android Resilience", "Android Combat Protocols", "Tool Proficiency", "Metalworks", "Android Shielding"],
+		"languagedesc": "You can speak, read, and write Common and Binary. Binary is comprised of 0's and 1's and these two numbers can be combined in an infintite combination of patterns to mean different things.",
+		"languages": ["Common", "Binary"]
+  },
+	"human": {
+		"name": "Neohuman",
+    "scorebonus": ["strength+1","dexterity+1","constitution+1","intelligence+1","wisdom+1","charisma+1"],
+		"age": "Neohumans reach adulthood in their late teens and thanks to modern science can live up to 140 years as of late. Neohumans age a bit slower.",
+		"alignment": "Neohumans tend to no particular alignment. The best and worst are found among them.",
+		"sizedesc": "Neohumans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless however, your size is Medium",
+    "size": "Medium",
+		"speeddesc": "Your base walking speed is 30 feet.",
+    "speed": 30,
+		"traits": ["Additional Language"],
+		"languagedesc": "You can speak, read, and write Common and one extra language of your choice. Neohumans typically learn the languages of other people and constructs they deal with.",
+		"languages": ["Common"]
+	},
+	"cyber": {
+		"name": "Cyber",
+    "scorebonus": ["intelligence+2"],
+		"age": "Cybernetted Humans can live up to 200 years. After that, their human parts start to fail and reject the mesh, they can no longer be kept on life support from the cybernetic parts.",
+		"alignment": "Cybers are still human and have no particular alignment unless they have some cybernetic behavioral feedback.",
+		"sizedesc": " Cybers are a little taller than the unmodified and on average and can weigh between 200 to 400 pounds. Your size is Medium.",
+    "size": "Medium",
+		"speeddesc": "Your base walking speed is 30 feet.",
+    "speed": 30,
+    "traits": ["Thermal Vision", "Robotkin", "Powerful Build", "Implanted AI", "Additional Language"],
+		"languagedesc": "You can speak, read, and write Common and one extra language of your choice",
+		"languages": ["Common"]
+  }
+}

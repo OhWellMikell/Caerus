@@ -1,0 +1,14 @@
+
+package.json
+
+package-lock.json
+
+json.sqlite
+
+node_modules/
+
+files/reports/
+
+files/config.json
+
+files/checklist.txt

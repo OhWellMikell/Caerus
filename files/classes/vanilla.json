@@ -1,0 +1,613 @@
+{
+  "barbarian": {
+		"name": "Barbarian",
+    "desc": "A fierce warrior of primitive background who can enter a battle rage.",
+		"hitdie": "d12",
+		"savethrow": ["Strength", "Constitution"],
+		"proficiency": ["Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons"],
+		"equipment": ["Explorer's Pack", "Four Javelins"],
+		"features": ["Barbarian Equipment Choice 1", "Barbarian Equipment Choice 2", "Barbarian Skill Choice 1", "Barbarian Skill Choice 2"],
+		"level": {
+			"1": {
+				"profbonus": "+2",
+				"features": ["Rage", "Unarmored Defense"],
+				 "rages": "2",
+				"ragedmg": "+2"
+			},
+			"2": {
+				"profbonus": "+2",
+				"features": ["Reckless Attack", "Danger Sense"],
+				 "rages": "2",
+				"ragedmg": "+2"
+			},
+			"3": {
+				"profbonus": "+2",
+				"features": ["Primal Path"],
+				 "rages": "3",
+				"ragedmg": "+2"
+			},
+			"4": {
+				"profbonus": "+2",
+				"features": ["Ability Score Improvement"],
+				 "rages": "3",
+				"ragedmg": "+2"
+			},
+			"5": {
+				"profbonus": "+3",
+				"features": ["Extra Attack", "Fast Movement"],
+				 "rages": "3",
+				"ragedmg": "+2"
+			},
+			"6": {
+				"profbonus": "+3",
+				"features": ["Path Feature"],
+				 "rages": "4",
+				"ragedmg": "+2"
+			},
+			"7": {
+				"profbonus": "+3",
+				"features": ["Feral Instinct"],
+				 "rages": "4",
+				"ragedmg": "+2"
+			},
+			"8": {
+				"profbonus": "+3",
+				"features": ["Ability Score Improvement"],
+				 "rages": "4",
+				"ragedmg": "+2"
+			},
+			"9": {
+				"profbonus": "+4",
+				"features": ["Brutal Critical (1 Die)"],
+				 "rages": "4",
+				"ragedmg": "+3"
+			},
+			"10": {
+				"profbonus": "+4",
+				"features": ["Path Feature"],
+				 "rages": "4",
+				"ragedmg": "+3"
+			},
+			"11": {
+				"profbonus": "+4",
+				"features": ["Relentless Rage"],
+				 "rages": "4",
+				"ragedmg": "+3"
+			},
+			"12": {
+				"profbonus": "+4",
+				"features": ["Ability Score Improvement"],
+				 "rages": "5",
+				"ragedmg": "+3"
+			},
+			"13": {
+				"profbonus": "+5",
+				"features": ["Brutal Critical (2 Dice)"],
+				 "rages": "5",
+				"ragedmg": "+3"
+			},
+			"14": {
+				"profbonus": "+5",
+				"features": ["Path Feature"],
+				 "rages": "5",
+				"ragedmg": "+3"
+			},
+			"15": {
+				"profbonus": "+5",
+				"features": ["Persistent Rage"],
+				 "rages": "5",
+				"ragedmg": "+3"
+			},
+			"16": {
+				"profbonus": "+5",
+				"features": ["Ability Score Improvement"],
+				 "rages": "5",
+				"ragedmg": "+4"
+			},
+			"17": {
+				"profbonus": "+6",
+				"features": ["Brutal Critical (3 Dice)"],
+				 "rages": "6",
+				"ragedmg": "+4"
+			},
+			"18": {
+				"profbonus": "+6",
+				"features": ["Indomitable Might"],
+				 "rages": "6",
+				"ragedmg": "+4"
+			},
+			"19": {
+				"profbonus": "+6",
+				"features": ["Ability Score Improvement"],
+				 "rages": "6",
+				"ragedmg": "+4"
+			},
+			"20": {
+				"profbonus": "+6",
+				"features": ["Primal Champion"],
+				"rages": "Unlimited",
+				"ragedmg": "+4"
+			}
+		}
+  },
+	"bard": {
+		"name": "Bard",
+    "desc": "An inspiring magician whose power echoes the music of creation.",
+		"hitdie": "d8",
+		"savethrow": ["Dexterity", "Charisma"],
+		"proficiency": ["Light Armor Proficiency", "Simple Weapon Proficiency", "Hand Crossbow Proficiency", "Longsword Proficiency", "Rapier Proficiency", "Shortsword Proficiency", "Musical Instrument 1", "Musical Instrument 2", "Musical Instrument 3"],
+		"instruments": ["Brass", "Stringed", "Woodwind", "Percussion", "Keyboard"],
+		"equipment": ["Bardic Equipment Choice 1", "Bardic Equipment Choice 2", "Bardic Equipment Choice 3", "Leather Armor", "Dagger"],
+		"level": {
+			"1": {
+				"profbonus": "+2",
+				"features": ["Spellcasting", "Bardic Inspiration"],
+				"inspiration": "d6",
+				"cantripsknown": "2",
+				"spellsknown": "4",
+				"slots": {
+					"1st": "2",
+					"2nd": "0",
+					"3rd": "0",
+					"4th": "0",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"2": {
+				"profbonus": "+2",
+				"features": ["Jack Of All Trades", "Song of Rest"],
+				"inspiration": "d6",
+				"rest": "d6",
+				"cantripsknown": "2",
+				"spellsknown": "5",
+				"slots": {
+					"1st": "3",
+					"2nd": "0",
+					"3rd": "0",
+					"4th": "0",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"3": {
+				"profbonus": "+2",
+				"features": ["Bard College", "Expertise"],
+				"inspiration": "d6",
+				"rest": "d6",
+				"cantripsknown": "2",
+				"spellsknown": "6",
+				"slot": {
+					"1st": "4",
+					"2nd": "2",
+					"3rd": "0",
+					"4th": "0",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"4": {
+				"profbonus": "+2",
+				"features": ["Ability Score Improvement"],
+				"inspiration": "d6",
+				"rest": "d6",
+				"cantripsknown": "3",
+				"spellsknown": "7",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "0",
+					"4th": "0",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"5": {
+				"profbonus": "+3",
+				"features": ["Font of Inspiration"],
+				"inspiration": "d8",
+				"rest": "d6",
+				"cantripsknown": "3",
+				"spellsknown": "8",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "2",
+					"4th": "0",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"6": {
+				"profbonus": "+3",
+				"features": ["Countercharm", "Bard College Feature"],
+				"inspiration": "d8",
+				"rest": "d6",
+				"cantripsknown": "3",
+				"spellsknown": "9",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "0",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"7": {
+				"profbonus": "+3",
+				"features": [],
+				"inspiration": "d8",
+				"rest": "d6",
+				"cantripsknown": "3",
+				"spellsknown": "10",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "1",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"8": {
+				"profbonus": "+3",
+				"features": ["Ability Score Improvement"],
+				"inspiration": "d8",
+				"rest": "d6",
+				"cantripsknown": "3",
+				"spellsknown": "11",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "2",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"9": {
+				"profbonus": "+4",
+				"features": [],
+				"inspiration": "d8",
+				"rest": "d8",
+				"cantripsknown": "3",
+				"spellsknown": "12",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "1",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"10": {
+				"profbonus": "+4",
+				"features": ["Expertise", "Magical Secrets"],
+				"inspiration": "d10",
+				"rest": "d8",
+				"cantripsknown": "4",
+				"spellsknown": "14",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "2",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"11": {
+				"profbonus": "+4",
+				"features": [],
+				"inspiration": "d10",
+				"rest": "d8",
+				"cantripsknown": "4",
+				"spellsknown": "15",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "2",
+					"6th": "1",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"12": {
+				"profbonus": "+4",
+				"features": ["Ability Score Improvement"],
+				"inspiration": "d10",
+				"rest": "d8",
+				"cantripsknown": "4",
+				"spellsknown": "15",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "2",
+					"6th": "1",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"13": {
+				"profbonus": "+5",
+				"features": [],
+				"inspiration": "d10",
+				"rest": "d10",
+				"cantripsknown": "4",
+				"spellsknown": "16",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "2",
+					"6th": "1",
+					"7th": "1",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"14": {
+				"profbonus": "+5",
+				"features": ["Magical Secrets", "Bard College Feature"],
+				"inspiration": "d10",
+				"rest": "d10",
+				"cantripsknown": "4",
+				"spellsknown": "18",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "2",
+					"6th": "1",
+					"7th": "1",
+					"8th": "0",
+					"9th": "0"
+				}
+			},
+			"15": {
+				"profbonus": "+5",
+				"features": [],
+				"inspiration": "d12",
+				"rest": "d10",
+				"cantripsknown": "4",
+				"spellsknown": "19",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "2",
+					"6th": "1",
+					"7th": "1",
+					"8th": "1",
+					"9th": "0"
+				}
+			},
+			"16": {
+				"profbonus": "+5",
+				"features": ["Ability Score Improvement"],
+				"inspiration": "d12",
+				"rest": "d10",
+				"cantripsknown": "4",
+				"spellsknown": "19",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "2",
+					"6th": "1",
+					"7th": "1",
+					"8th": "1",
+					"9th": "0"
+				}
+			},
+			"17": {
+				"profbonus": "+6",
+				"features": [],
+				"inspiration": "d12",
+				"rest": "d12",
+				"cantripsknown": "4",
+				"spellsknown": "20",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "2",
+					"6th": "1",
+					"7th": "1",
+					"8th": "1",
+					"9th": "1"
+				}
+			},
+			"18": {
+				"profbonus": "+6",
+				"features": ["Magical Secrets"],
+				"inspiration": "d12",
+				"rest": "d12",
+				"cantripsknown": "4",
+				"spellsknown": "22",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "3",
+					"6th": "1",
+					"7th": "1",
+					"8th": "1",
+					"9th": "1"
+				}
+			},
+			"19": {
+				"profbonus": "+6",
+				"features": ["Ability Score Improvement"],
+				"inspiration": "d12",
+				"rest": "d12",
+				"cantripsknown": "4",
+				"spellsknown": "22",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "3",
+					"6th": "2",
+					"7th": "1",
+					"8th": "1",
+					"9th": "1"
+				}
+			},
+			"20": {
+				"profbonus": "+6",
+				"features": ["Superior Inspiration"],
+				"inspiration": "d12",
+				"rest": "d12",
+				"cantripsknown": "4",
+				"spellsknown": "22",
+				"slot": {
+					"1st": "4",
+					"2nd": "3",
+					"3rd": "3",
+					"4th": "3",
+					"5th": "3",
+					"6th": "2",
+					"7th": "2",
+					"8th": "1",
+					"9th": "1"
+				}
+			}
+		}
+  },
+	"cleric": {
+		"name": "Cleric",
+    "desc": "A priestly champion who wields divine magic in service of a higher power.",
+		"hitdie": "d8",
+		"savethrow": ["Wisdom", "Charisma"],
+		"proficiency": ["Light Armor Proficiency", "Medium Armor Proficiency", "Shield Proficiency", "Simple Weapon Proficiency"],
+		"level": {
+			"1": {
+				"profbonus": "+2",
+				"features": ["Spellcasting", "Divine Domain"],
+				"divinity": "1",
+				"cantripsknown": "2",
+				"spellsknown": "4",
+				"slots": {
+					"1st": "2",
+					"2nd": "0",
+					"3rd": "0",
+					"4th": "0",
+					"5th": "0",
+					"6th": "0",
+					"7th": "0",
+					"8th": "0",
+					"9th": "0"
+				}
+			}
+		}
+  },
+	"druid": {
+		"name": "Druid",
+    "desc": "A Priest of the Old Faith, wielding the powers of nature- moonlight and plant growth, fire and lightning- and adpoting animal forms.",
+		"hitdie": "d8",
+		"savethrow": ["Intelligence", "Wisdom"],
+		"proficiency": ["Light Armor Proficiency (Nonmetal)", "Medium Armor Proficiency (Nonmetal)", "Shield Proficiency (Nonmetal)", "Club Proficiency", "Dagger Proficiency", "Dart Proficiency", "Javelin Proficiency", "Mace Proficiency", "Quarterstaff Proficiency", "Scimitar Proficiency", "Sickle Proficiency", "Sling Proficiency", "Spear Proficiency"]
+  },
+	"fighter": {
+		"name": "Fighter",
+    "desc": "A master of martial combat, skilled with a variety of weapons and armor.",
+		"hitdie": "d10",
+		"savethrow": ["Strength", "Constitution"],
+		"proficiency": ["Light Armor Proficiency", "Medium Armor Proficiency", "Heavy Armor Proficiency", "Shield Proficiency", "Simple Weapon Proficiency", "Martial Weapon Proficiency"]
+  },
+	"monk": {
+		"name": "Monk",
+    "desc": "A master of martial arts, harnessing the power of the body in pursuit of physical and spiritual perfection.",
+		"hitdie": "d8",
+		"savethrow": ["Stength", "Dexterity"],
+		"proficiency": ["Simple Weapon Proficiency", "Shortsword Proficiency"]
+  },
+	"paladin": {
+		"name": "Paladin",
+    "desc": "A holy warrior bound to a sacred oath.",
+		"hitdie": "d10",
+		"savethrow": ["Wisdom", "Charisma"],
+		"proficiency": ["Light Armor Proficiency", "Medium Armor Proficiency", "Heavy Armor Proficiency", "Shield Proficiency", "Simple Weapon Proficiency", "Martial Weapon Proficiency"]
+  },
+	"ranger": {
+		"name": "Ranger",
+    "desc": "A warrior who uses martial prowess and nature magic to combat threats on the edges of civilization.",
+		"hitdie": "d10",
+		"savethrow": ["Strength", "Dexterity"],
+		"proficiency": ["Light Armor Proficiency", "Medium Armor Proficiency", "Shield Proficiency", "Simple Weapon Proficiency", "Martial Weapon Proficiency"]
+  },
+	"rogue": {
+		"name": "Rogue",
+    "desc": "A scoundrel who uses stealth and trickery to overcome obstacles and enemies.",
+		"hitdie": "d8",
+		"savethrow": ["Dexterity", "Intelligence"],
+		"proficiency": ["Light Armor Proficiency", "Simple Weapon Proficiency", "Hand Crossbow Proficiency", "Longsword Proficiency", "Rapier Proficiency", "Shortsword Proficiency"]
+  },
+	"sorcerer": {
+		"name": "Sorcerer",
+    "desc": "A spellcaster who draws on inherent magic from a gift or bloodline.",
+		"hitdie": "d6",
+		"savethrow": ["Constitution", "Charisma"],
+		"proficiency": ["Dagger Proficiency", "Dart Proficiency", "Sling Proficiency", "Quarterstaff Proficiency", "Light Crossbow Proficiency"]
+  },
+	"warlock": {
+		"name": "Warlock",
+    "desc": "A wileder of magic that is derived from a bargain with an extraplanar entity.",
+		"hitdie": "d8",
+		"savethrow": ["Wisdom", "Charisma"],
+		"proficiency": ["Light Armor Proficiency", "Simple Weapon Proficiency"]
+  },
+	"wizard": {
+		"name": "Wizard",
+    "desc": "A scholarly magic-user capable of manipulating the structures of reality",
+		"hitdie": "d6",
+		"savethrow": ["Intelligence", "Wisdom"],
+		"proficiency": ["Dagger Proficiency", "Dart Proficiency", "Sling Proficiency", "Quarterstaff Proficiency", "Light Crossbow Proficiency"]
+  }
+}
