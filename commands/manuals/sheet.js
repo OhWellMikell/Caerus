@@ -952,7 +952,95 @@ exports.run = async (Discord, bot, config, message, args) => {
 	}
 
 	if(keyword == `lock`){
-		// Its a code block
+
+		// Console
+		console.log(`Im inside lock.`);
+		// Error Traps
+		if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
+			return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet** ***roll***`);
+
+		}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
+			return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet** ***save***`);
+
+		}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == true){
+			return message.reply(`\n>>> You saved your ability scores. But you have to assign them to abilities. Assign them with **/sheet** ***[score] [ability]***`);
+
+		}else if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == true || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == true){
+			if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
+					campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0 &&
+					campFiles.get(`${campaign}.${player}.constitution[0]`) > 0 &&
+					campFiles.get(`${campaign}.${player}.intelligence[0]`) > 0 &&
+					campFiles.get(`${campaign}.${player}.wisdom[0]`) > 0 &&
+					campFiles.get(`${campaign}.${player}.charisma[0]`) > 0 ){
+
+				// Local variables
+				let k         = 0;
+				let response  = false;
+				let collector = undefined;
+
+				// Deploy Question
+				try{
+
+					// Question Prompt
+					message.reply(`\n>>> You are about to lock your ability scores, after this you cannot change or re-arrange your stats.\n_Are you sure you want to do this?_  **(Yes/No)**`);
+
+					// Question Collector
+					collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+
+					// Collector Events
+					collector.on(`collect`, message => {
+
+						// Message Iterator
+						k += 1;
+
+						// Question Choices
+						if(config.yes.includes(`${message.content.toLowerCase().trim()}`) || config.yes.includes(`/${message.content.toLowerCase().trim()}`)){
+
+							// Delete response
+							message.delete().catch(console.error);
+
+							// Set response status true and stop collector
+							response = true;
+							collector.stop();
+
+							// Lock the scores and prompt the player that the stats have been locked in place.
+							campFiles.set(`${campaign}.${player}.scoreslocked`, true);
+							return message.reply(`\n>>> Ability scores are now locked in place.`);
+
+						}else if (config.no.includes(`${message.content.toLowerCase().trim()}`) || config.no.includes(`/${message.content.toLowerCase().trim()}`)){
+
+							// Delete response
+							message.delete().catch(console.error);
+
+							// Set response status true and stop collector
+							response = true;
+							collector.stop();
+
+							// Send abortion notification to the chat
+							message.reply(`\n>>> **Action Ended.**`);
+
+						}
+
+						// Iterator Stops Collector
+						if(k >= 3) collector.stop();
+
+					});
+
+					collector.on(`end`, () => {
+
+						// Abortion Status
+						if(response == false && k == 0) message.reply(`\n>>> *Action Ended: Question Timed out.*`)
+						else if(response == false && k >= 2) message.reply(`\n>>> *Action Ended: Too many unrecognized answers.*`)
+						else return;
+
+					});
+
+				}catch(e){
+					console.log(e);
+
+				}
+			}
+		}
 	}
 
 	if(keyword == `reset`){
