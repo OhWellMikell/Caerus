@@ -65,12 +65,12 @@ exports.run = async (Discord, bot, config, message, args) => {
 		let clas         = campFiles.get(`${campaign}.${player}.class`);
 
 		let add          = (a, b) => a + b
-		let strength     = campFiles.get(`${campaign}.${player}.strength`).reduce(add).toString().padEnd(5, ` `);
-		let dexterity    = campFiles.get(`${campaign}.${player}.dexterity`).reduce(add).toString().padEnd(5, ` `);
-		let constitution = campFiles.get(`${campaign}.${player}.constitution`).reduce(add).toString().padEnd(5, ` `);
-		let intelligence = campFiles.get(`${campaign}.${player}.intelligence`).reduce(add).toString().padEnd(5, ` `);
-		let wisdom       = campFiles.get(`${campaign}.${player}.wisdom`).reduce(add).toString().padEnd(5, ` `);
-		let charisma     = campFiles.get(`${campaign}.${player}.charisma`).reduce(add).toString().padEnd(5, ` `);
+		let strength     = campFiles.get(`${campaign}.${player}.strength`).reduce(add);
+		let dexterity    = campFiles.get(`${campaign}.${player}.dexterity`).reduce(add);
+		let constitution = campFiles.get(`${campaign}.${player}.constitution`).reduce(add);
+		let intelligence = campFiles.get(`${campaign}.${player}.intelligence`).reduce(add);
+		let wisdom       = campFiles.get(`${campaign}.${player}.wisdom`).reduce(add);
+		let charisma     = campFiles.get(`${campaign}.${player}.charisma`).reduce(add);
 
 		let strength_bonus     = campFiles.get(`${campaign}.${player}.strength_bonus`);
 		let dexterity_bonus    = campFiles.get(`${campaign}.${player}.dexterity_bonus`);
@@ -241,7 +241,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 		campFiles.set(`${campaign}.${player}.character`, `${name}`);
 
 		// Sending Name change Status to the Chat
-		message.channel.send(`\n>>> Your character name has been set to **${name}**.`).then(sentMessage => {
+		message.reply(`\n>>> Your character name has been set to **${name}**.`).then(sentMessage => {
 			sentMessage.delete(15000);});
 
 		return;
@@ -290,12 +290,12 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 			// Setting the Alignment
 			campFiles.set(`${campaign}.${player}.alignment`, alignfile[`${alignment}`].name);
-			message.channel.send(`\n>>> You have chosen **${alignfile[`${alignment}`].name}** as your alignment.`).then(sentMessage => {
+			message.reply(`\n>>> You have chosen **${alignfile[`${alignment}`].name}** as your alignment.`).then(sentMessage => {
 				sentMessage.delete(15000);});
 
 		}
 		else{
-			message.channel.send(`\n>>> There is no **${alignment}** alignment to select. As a reminder, this campaign uses **${fileselect}** alignments.`).then(sentMessage => {
+			message.reply(`\n>>> There is no **${alignment}** alignment to select. As a reminder, this campaign uses **${fileselect}** alignments.`).then(sentMessage => {
 				sentMessage.delete(15000);});
 		}
 
@@ -536,10 +536,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 			let string = ``;
 
 			if(campFiles.get(`${campaign}.${player}.scoressaved`) == true){
-				return message.channel.send(`\n>>> You saved your ability scores already.`);
+				return message.reply(`\n>>> You saved your ability scores already.`);
 			}
 			if(campFiles.get(`${campaign}.${player}.rolls`) <= 0){
-				return message.channel.send(`\n>>> You maxed out your retries on rolling ability scores.`);
+				return message.reply(`\n>>> You maxed out your retries on rolling ability scores.`);
 			}
 
 			for(let i = 0; i < 6; i++){
@@ -554,7 +554,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				if(i == 5){
 					if(Math.floor(scores.reduce(sum)/scores.length) <= 9){
-						return message.channel.send(`\n>>> Yikes.\nYou rolled commoner stats.` +
+						return message.reply(`\n>>> Yikes.\nYou rolled commoner stats.` +
 						`\nCommoner stats don't count.\nRoll again.\n\nBad Batch:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
 					}
 				}
@@ -562,14 +562,14 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 			campFiles.subtract(`${campaign}.${player}.rolls`, 1);
 			campFiles.set(`${campaign}.${player}.scores`, scores);
-			message.channel.send(`\n>>> You rolled these numbers:\`\`\`css\n${string}\`\`\`\nGiving you:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
+			message.reply(`\n>>> You rolled these numbers:\`\`\`css\n${string}\`\`\`\nGiving you:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
 			if(campFiles.get(`${campaign}.${player}.rolls`) > 0){
-				message.channel.send(`\n>>> Don't like your numbers?\nYou can choose to sacrifice this set and try ${campFiles.get(`${campaign}.${player}.rolls`)}` +
+				message.reply(`\n>>> Don't like your numbers?\nYou can choose to sacrifice this set and try ${campFiles.get(`${campaign}.${player}.rolls`)}` +
 				` more time(s). Be careful though, as there are no take-backsies.` +
 				`\nIf you *do* like your numbers however, be sure to type **/sheet scores** ***save***`);
 			}
 			if(campFiles.get(`${campaign}.${player}.rolls`) <= 0){
-				message.channel.send(`\n>>> You have run out of retries, the set you have rolled is now what you get!` +
+				message.reply(`\n>>> You have run out of retries, the set you have rolled is now what you get!` +
 					` Type **/sheet scores** ***save*** to finalize it.` +
 					`\nOr....avoid the inevitable, abandon the character sheet and never look back again.\n\n:runner::skin-tone-3:`);
 			}
@@ -582,10 +582,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 			// If Scores isn't blank then set Scoressaved to true
 			if(campFiles.get(`${campaign}.${player}.scores`) == undefined || campFiles.get(`${campaign}.${player}.scores`).length < 6){
-				return message.channel.send(`\n>>> You dont have a set of ability scores to save.`);
+				return message.reply(`\n>>> You dont have a set of ability scores to save.`);
 			}else{
 				campFiles.set(`${campaign}.${player}.scoressaved`, true);
-				return message.channel.send(`\n>>> Your ability scores have been saved.`)
+				return message.reply(`\n>>> Your ability scores have been saved.`)
 			}
 		}
 
@@ -597,18 +597,18 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 			// Error Traps
 			if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-				return message.channel.send(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet scores** ***now***`);
+				return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet scores** ***now***`);
 
 			}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-				return message.channel.send(`\n>>> You didn't save your ability scores. Save the set with **/sheet scores** ***save***`);
+				return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet scores** ***save***`);
 
 			}else if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == true || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == true){
-				return message.channel.send(`\n>>> You have assigned all your ability scores.` +
+				return message.reply(`\n>>> You have assigned all your ability scores.` +
 					`\nIf you'd like to re-arrange them you can return them to your hand with **/sheet scores** ***reset***.` +
 					`\nIf you like where they are and would like to save them. Type **/sheet scores** ***lock***.`);
 
 			}else if(!stat || stat == ``){
-				return message.channel.send(`\n>>> You didn't specify which ability you're selecting for the score.` +
+				return message.reply(`\n>>> You didn't specify which ability you're selecting for the score.` +
 				` Choose the ability with **/sheet scores** ***[score] [ability]***\n` +
 				` For example, **/sheet scores** ***12 dex***`);
 			}
@@ -631,7 +631,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				if(strength.includes(stat)){
 					if(campFiles.get(`${campaign}.${player}.strength[0]`) > 0){
-						return message.channel.send(`\n>>> There is already a score placed in strength.` +
+						return message.reply(`\n>>> There is already a score placed in strength.` +
 							` You can call back your scores with **/sheet scores** ***reset***.`);
 
 					}
@@ -640,10 +640,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 					update = campFiles.get(`${campaign}.${player}.scores`);
 					update.splice(index_num, 1);
 					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.channel.send(`\n>>> ${command} has been assigned to strength.`);
+					return message.reply(`\n>>> ${command} has been assigned to strength.`);
 				}else if(dexterity.includes(stat)){
 					if(campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0){
-						return message.channel.send(`\n>>> There is already a score placed in dexterity.` +
+						return message.reply(`\n>>> There is already a score placed in dexterity.` +
 							` You can call back your scores with **/sheet scores** ***reset***.`);
 
 					}
@@ -652,10 +652,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 					update = campFiles.get(`${campaign}.${player}.scores`);
 					update.splice(index_num, 1);
 					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.channel.send(`\n>>> ${command} has been assigned to dexterity.`);
+					return message.reply(`\n>>> ${command} has been assigned to dexterity.`);
 				}else if(constitution.includes(stat)){
 					if(campFiles.get(`${campaign}.${player}.constitution[0]`) > 0){
-						return message.channel.send(`\n>>> There is already a score placed in ${stat}.` +
+						return message.reply(`\n>>> There is already a score placed in ${stat}.` +
 							` You can call back your scores with **/sheet scores** ***reset***.`);
 
 					}
@@ -664,10 +664,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 					update = campFiles.get(`${campaign}.${player}.scores`);
 					update.splice(index_num, 1);
 					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.channel.send(`\n>>> ${command} has been assigned to constitution.`);
+					return message.reply(`\n>>> ${command} has been assigned to constitution.`);
 				}else if(intelligence.includes(stat)){
 					if(campFiles.get(`${campaign}.${player}.intelligence[0]`) > 0){
-						return message.channel.send(`\n>>> There is already a score placed in intelligence.` +
+						return message.reply(`\n>>> There is already a score placed in intelligence.` +
 							` You can call back your scores with **/sheet scores** ***reset***.`);
 
 					}
@@ -676,10 +676,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 					update = campFiles.get(`${campaign}.${player}.scores`);
 					update.splice(index_num, 1);
 					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.channel.send(`\n>>> ${command} has been assigned to intelligence.`);
+					return message.reply(`\n>>> ${command} has been assigned to intelligence.`);
 				}else if(wisdom.includes(stat)){
 					if(campFiles.get(`${campaign}.${player}.wisdom[0]`) > 0){
-						return message.channel.send(`\n>>> There is already a score placed in wisdom.` +
+						return message.reply(`\n>>> There is already a score placed in wisdom.` +
 							` You can call back your scores with **/sheet scores** ***reset***.`);
 
 					}
@@ -688,10 +688,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 					update = campFiles.get(`${campaign}.${player}.scores`);
 					update.splice(index_num, 1);
 					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.channel.send(`\n>>> ${command} has been assigned to wisdom.`);
+					return message.reply(`\n>>> ${command} has been assigned to wisdom.`);
 				}else if(charisma.includes(stat)){
 					if(campFiles.get(`${campaign}.${player}.charisma[0]`) > 0){
-						return message.channel.send(`\n>>> There is already a score placed in charisma.` +
+						return message.reply(`\n>>> There is already a score placed in charisma.` +
 							` You can call back your scores with **/sheet scores** ***reset***.`);
 
 					}
@@ -700,13 +700,13 @@ exports.run = async (Discord, bot, config, message, args) => {
 					update = campFiles.get(`${campaign}.${player}.scores`);
 					update.splice(index_num, 1);
 					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.channel.send(`\n>>> ${command} has been assigned to charisma.`);
+					return message.reply(`\n>>> ${command} has been assigned to charisma.`);
 				}else{
-					return message.channel.send(`\n>>> ${stat} is not an ability to place your points in.`);
+					return message.reply(`\n>>> ${stat} is not an ability to place your points in.`);
 				}
 
 			}else{
-				return message.channel.send(`\n>>> ${command} is not one of your rolled scores.`);
+				return message.reply(`\n>>> ${command} is not one of your rolled scores.`);
 
 			}
 
@@ -726,10 +726,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 		// Error Traps
 		if(campFiles.get(`${campaign}.${player}.scoressaved`) == true){
-			return message.channel.send(`\n>>> You saved your ability scores already. ${message.author}`);
+			return message.reply(`\n>>> You saved your ability scores already.`);
 		}
 		if(campFiles.get(`${campaign}.${player}.rolls`) <= 0){
-			return message.channel.send(`\n>>> You maxed out your retries on rolling ability scores. ${message.author}`);
+			return message.reply(`\n>>> You maxed out your retries on rolling ability scores.`);
 		}
 
 		// For six times...
@@ -754,7 +754,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 			// On the 6th iteration, check to see if the average total is higher than ten
 			if(i == 5){
 				if(Math.floor(scores.reduce(sum)/scores.length) <= 9){
-					return message.channel.send(`\n>>> Yikes.\nYou rolled commoner stats.` +
+					return message.reply(`\n>>> Yikes.\nYou rolled commoner stats.` +
 					`\nCommoner stats don't count.\nRoll again.\n\nBad Batch:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
 				}
 			}
@@ -765,16 +765,16 @@ exports.run = async (Discord, bot, config, message, args) => {
 		campFiles.set(`${campaign}.${player}.scores`, scores);
 
 		// Prompt the player their results
-		message.channel.send(`\n>>> ${message.author}\nYou rolled these numbers:\`\`\`css\n${string}\`\`\`\nGiving you:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
+		message.reply(`\n>>> You rolled these numbers:\`\`\`css\n${string}\`\`\`\nGiving you:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
 
 		// Prompt the player depending on their remaining rolls wether or not they'd like to save or roll again.
 		if(campFiles.get(`${campaign}.${player}.rolls`) > 0){
-			return message.channel.send(`\n>>> Don't like your numbers ${message.author}?\nYou can choose to sacrifice this set and try` +
+			return message.reply(`\n>>> Don't like your numbers?\nYou can choose to sacrifice this set and try` +
 			` ${campFiles.get(`${campaign}.${player}.rolls`)} more time(s). Be careful though, as there are no take-backsies.` +
 			`\nIf you *do* like your numbers however, be sure to type **/sheet** ***save*** so that you can move on and assign the numbers.`);
 		}
 		if(campFiles.get(`${campaign}.${player}.rolls`) <= 0){
-			return message.channel.send(`\n>>> You have run out of retries ${message.author}, the set you have rolled is now what you get!` +
+			return message.reply(`\n>>> You have run out of retries, the set you have rolled is now what you get!` +
 				` Type **/sheet** ***save*** to be able to move on and assign the numbers.` +
 				`\nOr....avoid the inevitable, abandon the character sheet and never look back again.\n\n:runner::skin-tone-3:`);
 		}
@@ -785,17 +785,11 @@ exports.run = async (Discord, bot, config, message, args) => {
 	if(keyword == `save`){
 
 		// If player scores is not blank then set scoressaved to true
-		if(campFiles.get(`${campaign}.${player}.scoressaved`) == true){
-			return message.channel.send(`\n>>> You already saved your ability scores ${message.author}.` +
-				` Use **/sheet** ***[score] [ability]*** to start assigning them.`)
-		}else if(campFiles.get(`${campaign}.${player}.scores`) == undefined || campFiles.get(`${campaign}.${player}.scores`).length < 6){
-			return message.channel.send(`\n>>> You dont have a set of ability scores to save. ${message.author}`);
+		if(campFiles.get(`${campaign}.${player}.scores`) == undefined || campFiles.get(`${campaign}.${player}.scores`).length < 6){
+			return message.reply(`\n>>> You dont have a set of ability scores to save.`);
 		}else{
 			campFiles.set(`${campaign}.${player}.scoressaved`, true);
-			return message.channel.send(`\n>>> Your ability scores have been saved. ${message.author}` +
-				`\n\`\`\`yaml\n${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}\`\`\`` +
-				`Use **/sheet** ***[score] [ability]*** to start assigning these scores to abilities.` +
-				`\nFor example, **/sheet** ***${campFiles.get(`${campaign}.${player}.scores[1]`)} dex*** will assign that score to dexterity.`);
+			return message.reply(`\n>>> Your ability scores have been saved.`)
 		}
 
 	}
@@ -808,20 +802,20 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 		// Error Traps
 		if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-			return message.channel.send(`\n>>> You didn't roll any ability scores ${message.author}. Roll a set with **/sheet** ***roll***`);
+			return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet** ***roll***`);
 
 		}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-			return message.channel.send(`\n>>> You didn't save your ability scores ${message.author}. Save the set with **/sheet** ***save***`);
+			return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet** ***save***`);
 
 		}else if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == true || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == true){
-			return message.channel.send(`\n>>> You have assigned all your ability scores ${message.author}.` +
+			return message.reply(`\n>>> You have assigned all your ability scores.` +
 				`\nIf you'd like to re-arrange them you can return them to your hand with **/sheet** ***reset***.` +
 				`\nIf you like where they are and would like to save them. Type **/sheet** ***lock***.`);
 
 		}else if(!stat || stat == ``){
-			return message.channel.send(`\n>>> You didn't specify which ability you're selecting for the score ${message.author}.` +
+			return message.reply(`\n>>> You didn't specify which ability you're selecting for the score.` +
 			` Choose the ability with **/sheet** ***[score] [ability]***\n` +
-			` For example, **/sheet 12** ***con***`);
+			` For example, **/sheet** ***12 dex***`);
 		}
 
 		// If the Number specified is in the list of scores
@@ -842,7 +836,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Check if there isnt already a number occupying the stat.
 				if(campFiles.get(`${campaign}.${player}.strength[0]`) > 0){
-					return message.channel.send(`\n>>> There is already a score placed in strength ${message.author}.` +
+					return message.reply(`\n>>> There is already a score placed in strength.` +
 						` You can call back your scores with **/sheet** ***reset***.`);
 
 				}
@@ -874,7 +868,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Check if there isnt already a number occupying the stat.
 				if(campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0){
-					return message.channel.send(`\n>>> There is already a score placed in dexterity ${message.author}.` +
+					return message.reply(`\n>>> There is already a score placed in dexterity.` +
 						` You can call back your scores with **/sheet** ***reset***.`);
 
 				}
@@ -906,7 +900,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Check if there isnt already a number occupying the stat.
 				if(campFiles.get(`${campaign}.${player}.constitution[0]`) > 0){
-					return message.channel.send(`\n>>> There is already a score placed in constitution ${message.author}.` +
+					return message.reply(`\n>>> There is already a score placed in ${stat}.` +
 						` You can call back your scores with **/sheet** ***reset***.`);
 
 				}
@@ -938,7 +932,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Check if there isnt already a number occupying the stat.
 				if(campFiles.get(`${campaign}.${player}.intelligence[0]`) > 0){
-					return message.channel.send(`\n>>> There is already a score placed in intelligence ${message.author}.` +
+					return message.reply(`\n>>> There is already a score placed in intelligence.` +
 						` You can call back your scores with **/sheet** ***reset***.`);
 
 				}
@@ -970,7 +964,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Check if there isnt already a number occupying the stat.
 				if(campFiles.get(`${campaign}.${player}.wisdom[0]`) > 0){
-					return message.channel.send(`\n>>> There is already a score placed in wisdom ${message.author}.` +
+					return message.reply(`\n>>> There is already a score placed in wisdom.` +
 						` You can call back your scores with **/sheet** ***reset***.`);
 
 				}
@@ -1002,7 +996,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Check if there isnt already a number occupying the stat.
 				if(campFiles.get(`${campaign}.${player}.charisma[0]`) > 0){
-					return message.channel.send(`\n>>> There is already a score placed in charisma ${message.author}.` +
+					return message.reply(`\n>>> There is already a score placed in charisma.` +
 						` You can call back your scores with **/sheet** ***reset***.`);
 
 				}
@@ -1033,11 +1027,11 @@ exports.run = async (Discord, bot, config, message, args) => {
 			}else{
 
 				// Prompt the player that the stat typed is not an ability for points to be placed in.
-				return message.channel.send(`\n>>> ${stat} is not an ability to place your points in ${message.author}.`);
+				return message.reply(`\n>>> ${stat} is not an ability to place your points in.`);
 			}
 
 		}else{
-			return message.channel.send(`\n>>> ${keyword} is not one of your rolled scores ${message.author}.`);
+			return message.reply(`\n>>> ${keyword} is not one of your rolled scores.`);
 
 		}
 
@@ -1047,13 +1041,13 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 		// Error Traps
 		if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-			return message.channel.send(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet** ***roll***`);
+			return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet** ***roll***`);
 
 		}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-			return message.channel.send(`\n>>> You didn't save your ability scores. Save the set with **/sheet** ***save***`);
+			return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet** ***save***`);
 
 		}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == true){
-			return message.channel.send(`\n>>> You saved your ability scores. But you have to assign them to abilities. Assign them with **/sheet** ***[score] [ability]***`);
+			return message.reply(`\n>>> You saved your ability scores. But you have to assign them to abilities. Assign them with **/sheet** ***[score] [ability]***`);
 
 		}else if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == true || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == true){
 			if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -1072,7 +1066,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 				try{
 
 					// Question Prompt
-					message.channel.send(`\n>>> You are about to lock your ability scores, after this you cannot change or re-arrange your stats.\n_Are you sure you want to do this?_  **(Yes/No)**`);
+					message.reply(`\n>>> You are about to lock your ability scores, after this you cannot change or re-arrange your stats.\n_Are you sure you want to do this?_  **(Yes/No)**`);
 
 					// Question Collector
 					collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
@@ -1095,7 +1089,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 							// Lock the scores and prompt the player that the stats have been locked in place.
 							campFiles.set(`${campaign}.${player}.scoreslocked`, true);
-							return message.channel.send(`\n>>> Ability scores are now locked in place.`);
+							return message.reply(`\n>>> Ability scores are now locked in place.`);
 
 						}else if (config.no.includes(`${message.content.toLowerCase().trim()}`) || config.no.includes(`/${message.content.toLowerCase().trim()}`)){
 
@@ -1107,7 +1101,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 							collector.stop();
 
 							// Send abortion notification to the chat
-							message.channel.send(`\n>>> **Action Ended.**`);
+							message.reply(`\n>>> **Action Ended.**`);
 
 						}
 
@@ -1119,8 +1113,8 @@ exports.run = async (Discord, bot, config, message, args) => {
 					collector.on(`end`, () => {
 
 						// Abortion Status
-						if(response == false && k == 0) message.channel.send(`\n>>> *Action Ended: Question Timed out.*`)
-						else if(response == false && k >= 2) message.channel.send(`\n>>> *Action Ended: Too many unrecognized answers.*`)
+						if(response == false && k == 0) message.reply(`\n>>> *Action Ended: Question Timed out.*`)
+						else if(response == false && k >= 2) message.reply(`\n>>> *Action Ended: Too many unrecognized answers.*`)
 						else return;
 
 					});
@@ -1207,7 +1201,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 										try{
 
 											// Question Prompt
-											message.channel.send(`\n>>> You are about to choose **${choicefile[`${clas}`][`${tag}`].options[j]}** as your equipment, consuming |_${features[i]}_ |.\n_Are you sure you want to do this?_  **(Yes/No)**`);
+											message.reply(`\n>>> You are about to choose **${choicefile[`${clas}`][`${tag}`].options[j]}** as your equipment, consuming |_${features[i]}_ |.\n_Are you sure you want to do this?_  **(Yes/No)**`);
 
 											// Question Collector
 											collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
@@ -1246,7 +1240,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 													match    = false;
 
 													// Send choice notification to chat
-													message.channel.send(`\n>>> **${choicefile[`${clas}`][`${tag}`].options[j]}** has been chosen as your equipment.`)
+													message.reply(`\n>>> **${choicefile[`${clas}`][`${tag}`].options[j]}** has been chosen as your equipment.`)
 
 												}else if (config.no.includes(`${message.content.toLowerCase().trim()}`) || config.no.includes(`/${message.content.toLowerCase().trim()}`)){
 
@@ -1258,7 +1252,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 													match    = false;
 
 													// Send abortion notification to the chat
-													message.channel.send(`\n>>> **Action Ended.**`);
+													message.reply(`\n>>> **Action Ended.**`);
 
 												}
 
@@ -1270,8 +1264,8 @@ exports.run = async (Discord, bot, config, message, args) => {
 											collector.on(`end`, () => {
 
 												// Abortion Status
-												if(response == false && k == 0) message.channel.send(`\n>>> *Action Ended: Question Timed out.*`)
-												else if(response == false && k >= 2) message.channel.send(`\n>>> *Action Ended: Too many unrecognized answers.*`)
+												if(response == false && k == 0) message.reply(`\n>>> *Action Ended: Question Timed out.*`)
+												else if(response == false && k >= 2) message.reply(`\n>>> *Action Ended: Too many unrecognized answers.*`)
 
 											});
 
@@ -1290,7 +1284,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 										try{
 
 											// Question Prompt
-											message.channel.send(`\n>>> You are about to choose **${choicefile[`${clas}`][`${tag}`].options[j]}** as your skill of expertise, consuming |_${features[i]}_ |.\n_Are you sure you want to do this?_  **(Yes/No)**`);
+											message.reply(`\n>>> You are about to choose **${choicefile[`${clas}`][`${tag}`].options[j]}** as your skill of expertise, consuming |_${features[i]}_ |.\n_Are you sure you want to do this?_  **(Yes/No)**`);
 
 											// Question Collector
 											collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
@@ -1310,7 +1304,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 													// Check If Skill is already in Proficiency
 													if(proficiency.includes(`${choicefile[`${clas}`][`${tag}`].options[j]}`)){
 														// Reply that the skill has already been selected
-														message.channel.send(`\n>>> You are already proficient in **${choicefile[`${clas}`][`${tag}`].options[j]}**.`);
+														message.reply(`\n>>> You are already proficient in **${choicefile[`${clas}`][`${tag}`].options[j]}**.`);
 													}else{
 														// Push Equipment Into Equipment Slot, Filter Out Tag, Update Features.
 														campFiles.push(`${campaign}.${player}.proficiencies`, `${choicefile[`${clas}`][`${tag}`].options[j]}`);
@@ -1318,7 +1312,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 														campFiles.set(`${campaign}.${player}.features`, features);
 
 														// Send choice notification to chat
-														message.channel.send(`\n>>> **${choicefile[`${clas}`][`${tag}`].options[j]}** has been chosen as your skill of expertise.`);
+														message.reply(`\n>>> **${choicefile[`${clas}`][`${tag}`].options[j]}** has been chosen as your skill of expertise.`);
 													}
 
 													// Set response status true and restore match to false
@@ -1335,7 +1329,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 													match    = false;
 
 													// Send abortion notification to the chat
-													message.channel.send(`\n>>> **Action Ended.**`);
+													message.reply(`\n>>> **Action Ended.**`);
 
 												}
 
@@ -1347,8 +1341,8 @@ exports.run = async (Discord, bot, config, message, args) => {
 											collector.on(`end`, () => {
 
 												// Abortion Status
-												if(response == false && k == 0) message.channel.send(`\n>>> *Action Ended: Question Timed out.*`)
-												else if(response == false && k >= 2) message.channel.send(`\n>>> *Action Ended: Too many unrecognized answers.*`)
+												if(response == false && k == 0) message.reply(`\n>>> *Action Ended: Question Timed out.*`)
+												else if(response == false && k >= 2) message.reply(`\n>>> *Action Ended: Too many unrecognized answers.*`)
 
 											});
 
@@ -1403,10 +1397,10 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 			// Error Traps
 			if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-				return message.channel.send(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet scores** ***now***`);
+				return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet scores** ***now***`);
 
 			}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-				return message.channel.send(`\n>>> You didn't save your ability scores. Save the set with **/sheet scores** ***save***`);
+				return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet scores** ***save***`);
 
 			}
 
@@ -1416,7 +1410,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 					campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0 &&
 					campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0 &&
 					campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0){
-				return message.channel.send(`\n>>> None of your abilities have an ability score assigned to them. There's no need to reset.`);
+				return message.reply(`\n>>> None of your abilities have an ability score assigned to them. There's no need to reset.`);
 
 			}
 
@@ -1448,7 +1442,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 			campFiles.set(`${campaign}.${player}.scores`, update);
 
-			return message.channel.send(`\n>>> Ability scores have been returned to the roll the list.`);
+			return message.reply(`\n>>> Ability scores have been returned to the roll the list.`);
 		}
 	}
 
