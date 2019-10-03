@@ -856,9 +856,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to strength ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] ==> ${keyword} strength\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> strength\`\`\``);
 
-				// Prmopt the player if they have assigned all of their scores
+				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.constitution[0]`) > 0 &&
@@ -888,9 +888,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player the the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to dexterity ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] ==> ${keyword} dexterity\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> dexterity\`\`\``);
 
-				// Prmopt the player if they have assigned all of their scores
+				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.constitution[0]`) > 0 &&
@@ -920,9 +920,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to constitution ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] ==> ${keyword} constitution\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> constitution\`\`\``);
 
-				// Prmopt the player if they have assigned all of their scores
+				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.constitution[0]`) > 0 &&
@@ -952,9 +952,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to intelligence ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] ==> ${keyword} intelligence\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> intelligence\`\`\``);
 
-				// Prmopt the player if they have assigned all of their scores
+				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.constitution[0]`) > 0 &&
@@ -984,9 +984,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to wisdom ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] ==> ${keyword} wisdom\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> wisdom\`\`\``);
 
-				// Prmopt the player if they have assigned all of their scores
+				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.constitution[0]`) > 0 &&
@@ -1016,9 +1016,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to charisma ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] ==> ${keyword} charisma\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> charisma\`\`\``);
 
-				// Prmopt the player if they have assigned all of their scores
+				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0 &&
 						campFiles.get(`${campaign}.${player}.constitution[0]`) > 0 &&
