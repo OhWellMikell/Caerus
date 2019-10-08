@@ -830,6 +830,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 			let charisma     = [`cha`,`charisma`];
 			let index_num;
 			let update;
+			let str = [];
 
 			// Check which stat has been specified. Assign the keyword as the stat.
 			if(strength.includes(stat)){
@@ -848,9 +849,18 @@ exports.run = async (Discord, bot, config, message, args) => {
 				update.splice(index_num, 1);
 				campFiles.set(`${campaign}.${player}.scores`, update);
 
+				// Unassigned Abilities
+				if( campFiles.get(`${campaign}.${player}.strength[0]`) <= 0) str.push(`STR`);
+				if( campFiles.get(`${campaign}.${player}.dexterity[0]`) <= 0) str.push(`DEX`);
+				if( campFiles.get(`${campaign}.${player}.constitution[0]`) <= 0) str.push(`CON`);
+				if( campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0) str.push(`INT`);
+				if( campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0) str.push(`WIS`);
+				if( campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0) str.push(`CHA`);
+
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to strength ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> strength\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> strength\`\`\`` +
+				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -880,9 +890,18 @@ exports.run = async (Discord, bot, config, message, args) => {
 				update.splice(index_num, 1);
 				campFiles.set(`${campaign}.${player}.scores`, update);
 
+				// Unassigned Abilities
+				if( campFiles.get(`${campaign}.${player}.strength[0]`) <= 0) str.push(`STR`);
+				if( campFiles.get(`${campaign}.${player}.dexterity[0]`) <= 0) str.push(`DEX`);
+				if( campFiles.get(`${campaign}.${player}.constitution[0]`) <= 0) str.push(`CON`);
+				if( campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0) str.push(`INT`);
+				if( campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0) str.push(`WIS`);
+				if( campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0) str.push(`CHA`);
+
 				// Prompt the player the the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to dexterity ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> dexterity\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> dexterity\`\`\`` +
+				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -912,9 +931,18 @@ exports.run = async (Discord, bot, config, message, args) => {
 				update.splice(index_num, 1);
 				campFiles.set(`${campaign}.${player}.scores`, update);
 
+				// Unassigned Abilities
+				if( campFiles.get(`${campaign}.${player}.strength[0]`) <= 0) str.push(`STR`);
+				if( campFiles.get(`${campaign}.${player}.dexterity[0]`) <= 0) str.push(`DEX`);
+				if( campFiles.get(`${campaign}.${player}.constitution[0]`) <= 0) str.push(`CON`);
+				if( campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0) str.push(`INT`);
+				if( campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0) str.push(`WIS`);
+				if( campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0) str.push(`CHA`);
+
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to constitution ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> constitution\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> constitution\`\`\`` +
+				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -944,9 +972,18 @@ exports.run = async (Discord, bot, config, message, args) => {
 				update.splice(index_num, 1);
 				campFiles.set(`${campaign}.${player}.scores`, update);
 
+				// Unassigned Abilities
+				if( campFiles.get(`${campaign}.${player}.strength[0]`) <= 0) str.push(`STR`);
+				if( campFiles.get(`${campaign}.${player}.dexterity[0]`) <= 0) str.push(`DEX`);
+				if( campFiles.get(`${campaign}.${player}.constitution[0]`) <= 0) str.push(`CON`);
+				if( campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0) str.push(`INT`);
+				if( campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0) str.push(`WIS`);
+				if( campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0) str.push(`CHA`);
+
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to intelligence ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> intelligence\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> intelligence\`\`\`` +
+				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -978,7 +1015,16 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to wisdom ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> wisdom\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> wisdom\`\`\`` +
+				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
+
+				// Unassigned Abilities
+				if( campFiles.get(`${campaign}.${player}.strength[0]`) <= 0) str.push(`STR`);
+				if( campFiles.get(`${campaign}.${player}.dexterity[0]`) <= 0) str.push(`DEX`);
+				if( campFiles.get(`${campaign}.${player}.constitution[0]`) <= 0) str.push(`CON`);
+				if( campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0) str.push(`INT`);
+				if( campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0) str.push(`WIS`);
+				if( campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0) str.push(`CHA`);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -1008,9 +1054,18 @@ exports.run = async (Discord, bot, config, message, args) => {
 				update.splice(index_num, 1);
 				campFiles.set(`${campaign}.${player}.scores`, update);
 
+				// Unassigned Abilities
+				if( campFiles.get(`${campaign}.${player}.strength[0]`) <= 0) str.push(`STR`);
+				if( campFiles.get(`${campaign}.${player}.dexterity[0]`) <= 0) str.push(`DEX`);
+				if( campFiles.get(`${campaign}.${player}.constitution[0]`) <= 0) str.push(`CON`);
+				if( campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0) str.push(`INT`);
+				if( campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0) str.push(`WIS`);
+				if( campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0) str.push(`CHA`);
+
 				// Prompt the player that the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to charisma ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> charisma\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> charisma\`\`\`` +
+				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
