@@ -53,6 +53,15 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 	}
 
+	// Updating Sheet Calculations
+	let add = (a,b) => a + b;
+	campFiles.set(`${campaign}.${player}.strength_bonus`, Math.floor((campFiles.get(`${campaign}.${player}.strength`).reduce(add) - 10) / 2));
+	campFiles.set(`${campaign}.${player}.dexterity_bonus`, Math.floor((campFiles.get(`${campaign}.${player}.dexterity`).reduce(add) - 10) / 2));
+	campFiles.set(`${campaign}.${player}.constitution_bonus`, Math.floor((campFiles.get(`${campaign}.${player}.constitution`).reduce(add) - 10) / 2));
+	campFiles.set(`${campaign}.${player}.intelligence_bonus`, Math.floor((campFiles.get(`${campaign}.${player}.intelligence`).reduce(add) - 10) / 2));
+	campFiles.set(`${campaign}.${player}.wisdom_bonus`, Math.floor((campFiles.get(`${campaign}.${player}.wisdom`).reduce(add) - 10) / 2));
+	campFiles.set(`${campaign}.${player}.charisma_bonus`, Math.floor((campFiles.get(`${campaign}.${player}.charisma`).reduce(add) - 10) / 2));
+
 	// If There Is No Keyword, Post Profile
 	if(!keyword){
 
@@ -64,13 +73,12 @@ exports.run = async (Discord, bot, config, message, args) => {
 		let level        = campFiles.get(`${campaign}.${player}.level`);
 		let clas         = campFiles.get(`${campaign}.${player}.class`);
 
-		let add          = (a, b) => a + b
-		let strength     = campFiles.get(`${campaign}.${player}.strength`).reduce(add);
-		let dexterity    = campFiles.get(`${campaign}.${player}.dexterity`).reduce(add);
-		let constitution = campFiles.get(`${campaign}.${player}.constitution`).reduce(add);
-		let intelligence = campFiles.get(`${campaign}.${player}.intelligence`).reduce(add);
-		let wisdom       = campFiles.get(`${campaign}.${player}.wisdom`).reduce(add);
-		let charisma     = campFiles.get(`${campaign}.${player}.charisma`).reduce(add);
+		let strength     = campFiles.get(`${campaign}.${player}.strength`).reduce(add).toString().padEnd(4, ` `);
+		let dexterity    = campFiles.get(`${campaign}.${player}.dexterity`).reduce(add).toString().padEnd(4, ` `);
+		let constitution = campFiles.get(`${campaign}.${player}.constitution`).reduce(add).toString().padEnd(4, ` `);
+		let intelligence = campFiles.get(`${campaign}.${player}.intelligence`).reduce(add).toString().padEnd(4, ` `);
+		let wisdom       = campFiles.get(`${campaign}.${player}.wisdom`).reduce(add).toString().padEnd(4, ` `);
+		let charisma     = campFiles.get(`${campaign}.${player}.charisma`).reduce(add).toString().padEnd(4, ` `);
 
 		let strength_bonus     = campFiles.get(`${campaign}.${player}.strength_bonus`);
 		let dexterity_bonus    = campFiles.get(`${campaign}.${player}.dexterity_bonus`);
@@ -79,6 +87,13 @@ exports.run = async (Discord, bot, config, message, args) => {
 		let wisdom_bonus       = campFiles.get(`${campaign}.${player}.wisdom_bonus`);
 		let charisma_bonus     = campFiles.get(`${campaign}.${player}.charisma_bonus`);
 		let proficiency_bonus  = campFiles.get(`${campaign}.${player}.proficiency_bonus`);
+
+		if(strength_bonus >= 0) strength_bonus = `+${strength_bonus}`;
+		if(dexterity_bonus >= 0) dexterity_bonus = `+${dexterity_bonus}`;
+		if(constitution_bonus >= 0) constitution_bonus = `+${constitution_bonus}`;
+		if(intelligence_bonus >= 0) intelligence_bonus = `+${intelligence_bonus}`;
+		if(wisdom_bonus >= 0) wisdom_bonus = `+${wisdom_bonus}`;
+		if(charisma_bonus >= 0) charisma_bonus = `+${charisma_bonus}`;
 
 		let languages   = campFiles.get(`${campaign}.${player}.languages`);
 		let traits      = campFiles.get(`${campaign}.${player}.traits`);
@@ -151,18 +166,18 @@ exports.run = async (Discord, bot, config, message, args) => {
 		let profileembed = new Discord.RichEmbed()
 
 		if(campFiles.get(`${campaign}.${player}.choices`) == true){
-			profileembed.addField(`**Choices**`, `********yaml\n!! You Have Player Choices, Use ${config.prefix}notify to see them !!******\n**`);
+			profileembed.addField(`**Choices**`, `\`\`\`yaml\nYou Have Player Choices, Use ${config.prefix}notify to see them!\n\`\`\`\u200b\n`);
 		}
 
 		profileembed
 		.setAuthor(`${name}'s  Character Sheet`, message.member.user.avatarURL)
-		.addField(`Character`, `${character}`, true)
-		.addField(`Race`, `${race}`, true)
-		.addField(`Alignment`, `${alignment}`, true)
-		.addField(`\u200b\nLevel & Class`, `Lvl. ${level} ${clas}\n\u200b`, true)
+		.addField(`Character`, `${character}\u200b\n`, true)
+		.addField(`Race`, `${race}\u200b\n`, true)
+		.addField(`Alignment`, `${alignment}\u200b\n`, true)
+		.addField(`Level & Class`, `Lvl. ${level} ${clas}\n\u200b`, true)
 		.addField(`Ability Scores   ${scores}`,
-			`\`\`\`yaml\nSTR: ${strength}${strength_bonus}\u0009INT: ${intelligence}${intelligence_bonus}\nDEX: ${dexterity}${dexterity_bonus}\u0009WIS: ${wisdom}${wisdom_bonus}\nCON: ${constitution}${constitution_bonus}\u0009CHA: ${charisma}${charisma_bonus}\`\`\`\`\`\`yaml\nPROFICIENCY: ${proficiency_bonus}\`\`\``)
-		.addField(`\u200b\nLanguages`, `${languages}`)
+			`\`\`\`yaml\nSTR: ${strength}${strength_bonus}\u0009INT: ${intelligence}${intelligence_bonus}\nDEX: ${dexterity}${dexterity_bonus}\u0009WIS: ${wisdom}${wisdom_bonus}\nCON: ${constitution}${constitution_bonus}\u0009CHA: ${charisma}${charisma_bonus}\`\`\`\`\`\`yaml\nPROFICIENCY: ${proficiency_bonus}\`\`\`\u200b\n`)
+		.addField(`Languages`, `${languages}`)
 		.addField(`Traits`, `${traits}`)
 		.addField(`Features`, `${features}`)
 		.addField(`Equipment`, `${equipment}`)
@@ -181,6 +196,8 @@ exports.run = async (Discord, bot, config, message, args) => {
 	// If The Keyword is Help
 	if(keyword == `help`){
 
+		let commandlist = [	`Name`, `Race`, `Alignment`, `Class`, `Scores`];
+
 		// Rich Embed
 		let helpembed = new Discord.RichEmbed()
 		.setTitle(`How does the  **/sheet**  command work?`)
@@ -188,8 +205,8 @@ exports.run = async (Discord, bot, config, message, args) => {
 			` It holds most of the key information used in a campaign.` +
 			` To fill in a character sheet, you use keywords that will enter that info respectively.\n\n` +
 			`For example, **/sheet name** ***Adae Riventhall***  will fill the character name section with the name "Adae Riventhall".\n\n` +
-			`**As a bonus tip:**\n *You can abbreviate /sheet as **/cs** or **/s.***\n`)
-		.addField(`**Keywords**`, `*Below are the keywords used to enter information.*\nName\nRace\nAlignment\nClass\nScores\n\u200b`)
+			`**As a bonus tip:**\n *You can abbreviate /sheet as **/cs** or **/s.***\n\u200b`)
+		.addField(`**Keywords**`, `*Below are the keywords used to enter information.*${commandlist.join(`\n`)}\n\u200b`)
 		.addField(`***Uhhh..***`, `If you dont understand how to use a keyword use the word with nothing after it.\nLike this: **/sheet** ***keyword***.` +
 			`\nA description will appear to help you.`)
 		.setColor(config.darkmagenta)
@@ -202,13 +219,13 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 	// If the Keyword is Keyword
 	if(keyword == `keyword` || keyword == `"keyword"`){
-		message.channel.send(`> No, Silly. Choose a keyword from the *keyword*  list.`);
+		message.channel.send(`> No, Silly. Choose a keyword from the *keywords*  list.`);
 		return;
 
 	}
 
 	// If the Keyword is Name
-	if(keyword == `name` || keyword == `n` || keyword == `character`){
+	if(keyword == `name` || keyword == `character`){
 
 		// Local Variables
 		let name = args.join(` `);
@@ -248,7 +265,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 	}
 
 	// If the Keyword is Alignment
-	if(keyword == `alignment` || keyword == `align` || keyword == `a`){
+	if(keyword == `alignment` || keyword == `align`){
 
 		// Local Variables
 		let alignment = args.join(` `).toLowerCase().trim();
@@ -302,7 +319,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 	}
 
 	// If the Keyword is Race
-	if(keyword == `race` || keyword == `r`){
+	if(keyword == `race`){
 
 		// Local Variables
 		let race = args.join(` `).toLowerCase()
@@ -416,7 +433,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 	}
 
 	// If the Keyword is Race
-	if(keyword == `class` || keyword == `c`){
+	if(keyword == `class`){
 
 		// Local Variables
 		let clas = args.join(` `).toLowerCase().trim()
@@ -499,221 +516,30 @@ exports.run = async (Discord, bot, config, message, args) => {
 	}
 
 	// If the Keyword is Scores
-	if(keyword == `scores` || keyword == `s`){
+	if(keyword == `scores`){
 
-		// Local Variables
-		let command = args.shift();
-		if(command) command.toLowerCase().trim();
+		let commandlist =	[	`**/sheet** ***roll***........*Rolls your ability scores*`,
+												`**/sheet** ***save***........*Saves your ability scores*`,
+												`**/sheet** ***<score> <ability>***........*Assigns the designated score to the designated ability*`,
+												`**/sheet** ***reset***........*Removes any assigned score and returns them to the roster*`,
+												`**/sheet** ***lock***........*After assigning all ability scores, locks in the scors permanently*`];
 
-		// If There is no Argument after Scores
-		if(!command || command == ``){
+		// Rich Embed
+		let scoresembed = new Discord.RichEmbed()
+		.setTitle(`Assigning Ability Scores`)
+		.setDescription(`The following are keyword commands so that you may assign ability scores to your character.` +
+		` Rolling your ability scores and assigning them is a crucial detail and arguably the most important step to building your character.` +
+		` It defines what they excel in, and possibly- what they absolutely suck at.\n`)
+		.addField(`**Keyword Commands**`, `\n${commandlist.join(`\n`)}\n\u200b`)
+		.setColor(config.darkmagenta)
 
-			// Rich Embed
-			let scoreembed = new Discord.RichEmbed()
-			.setTitle(`The **/sheet scores** keyword`)
-			.setDescription(`The **/sheet scores** keyword is how you roll your campaign character's ability scores.` +
-			` They are determined by rolling 4d6 and adding the three highest numbers.\n` +
-			`\nDeciding where to place your ability scores is a crucial step to creating your character.` +
-			` They define what features your character excels at- and sometimes what features they absolutely suck at.\n\u200b`)
-			.addField(`How to Use`, ` When you're ready to roll the virtual dice, type the keywords **/sheet scores** ***now***.\n`)
-			.setColor(config.darkmagenta)
+		// Send Embed
+		message.channel.send(scoresembed);
 
-			// Send Embed
-			message.channel.send(scoreembed);
-
-			return;
-		}
-
-		// If the Command is Now
-		if(command == `now`){
-
-			// Local variables
-			let rolls  = new Array(3);
-			let scores = new Array(5);
-			let sum    = (accu, curVal) => accu + curVal;
-			let num    = 0;
-			let result = 0;
-			let string = ``;
-
-			if(campFiles.get(`${campaign}.${player}.scoressaved`) == true){
-				return message.reply(`\n>>> You saved your ability scores already.`);
-			}
-			if(campFiles.get(`${campaign}.${player}.rolls`) <= 0){
-				return message.reply(`\n>>> You maxed out your retries on rolling ability scores.`);
-			}
-
-			for(let i = 0; i < 6; i++){
-				for(let j = 0; j < 4; j++){
-					num = Math.floor(Math.random() * 6) + 1;
-					rolls[j] = num;
-
-				}
-				result = rolls.reduce(sum) - Math.min(...rolls);
-				scores[i] = result;
-				string += `${rolls.join(`, `).padEnd(14, ` `)}${result}\n`;
-
-				if(i == 5){
-					if(Math.floor(scores.reduce(sum)/scores.length) <= 9){
-						return message.reply(`\n>>> Yikes.\nYou rolled commoner stats.` +
-						`\nCommoner stats don't count.\nRoll again.\n\nBad Batch:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
-					}
-				}
-			}
-
-			campFiles.subtract(`${campaign}.${player}.rolls`, 1);
-			campFiles.set(`${campaign}.${player}.scores`, scores);
-			message.reply(`\n>>> You rolled these numbers:\`\`\`css\n${string}\`\`\`\nGiving you:\n\`\`\`yaml\n${scores.join(`, `)}\`\`\``)
-			if(campFiles.get(`${campaign}.${player}.rolls`) > 0){
-				message.reply(`\n>>> Don't like your numbers?\nYou can choose to sacrifice this set and try ${campFiles.get(`${campaign}.${player}.rolls`)}` +
-				` more time(s). Be careful though, as there are no take-backsies.` +
-				`\nIf you *do* like your numbers however, be sure to type **/sheet scores** ***save***`);
-			}
-			if(campFiles.get(`${campaign}.${player}.rolls`) <= 0){
-				message.reply(`\n>>> You have run out of retries, the set you have rolled is now what you get!` +
-					` Type **/sheet scores** ***save*** to finalize it.` +
-					`\nOr....avoid the inevitable, abandon the character sheet and never look back again.\n\n:runner::skin-tone-3:`);
-			}
-
-			return;
-		}
-
-		// If the Command is Save
-		if(command == `save`){
-
-			// If Scores isn't blank then set Scoressaved to true
-			if(campFiles.get(`${campaign}.${player}.scores`) == undefined || campFiles.get(`${campaign}.${player}.scores`).length < 6){
-				return message.reply(`\n>>> You dont have a set of ability scores to save.`);
-			}else{
-				campFiles.set(`${campaign}.${player}.scoressaved`, true);
-				return message.reply(`\n>>> Your ability scores have been saved.`)
-			}
-		}
-
-		// If the Command is A Number
-		if(isNaN(command) == false){
-
-			// Local Variables
-			let stat    = args.join(` `).toLowerCase();
-
-			// Error Traps
-			if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-				return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet scores** ***now***`);
-
-			}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-				return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet scores** ***save***`);
-
-			}else if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == true || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == true){
-				return message.reply(`\n>>> You have assigned all your ability scores.` +
-					`\nIf you'd like to re-arrange them you can return them to your hand with **/sheet scores** ***reset***.` +
-					`\nIf you like where they are and would like to save them. Type **/sheet scores** ***lock***.`);
-
-			}else if(!stat || stat == ``){
-				return message.reply(`\n>>> You didn't specify which ability you're selecting for the score.` +
-				` Choose the ability with **/sheet scores** ***[score] [ability]***\n` +
-				` For example, **/sheet scores** ***12 dex***`);
-			}
-
-			// If the Number specified is in the list of scores
-			if(campFiles.get(`${campaign}.${player}.scores`).includes(Number(command))){
-
-				// Local variables
-				let strength     = [`str`,`strength`];
-				let dexterity    = [`dex`,`dexterity`];
-				let constitution = [`con`,`constitution`];
-				let intelligence = [`int`,`intelligence`];
-				let wisdom       = [`wis`,`wisdom`];
-				let charisma     = [`cha`,`charisma`];
-				let index_num;
-				let update;
-
-				console.log(`>` + stat + `<`);
-				console.log(strength);
-
-				if(strength.includes(stat)){
-					if(campFiles.get(`${campaign}.${player}.strength[0]`) > 0){
-						return message.reply(`\n>>> There is already a score placed in strength.` +
-							` You can call back your scores with **/sheet scores** ***reset***.`);
-
-					}
-					index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == command);
-					campFiles.set(`${campaign}.${player}.strength[0]`, Number(command));
-					update = campFiles.get(`${campaign}.${player}.scores`);
-					update.splice(index_num, 1);
-					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.reply(`\n>>> ${command} has been assigned to strength.`);
-				}else if(dexterity.includes(stat)){
-					if(campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0){
-						return message.reply(`\n>>> There is already a score placed in dexterity.` +
-							` You can call back your scores with **/sheet scores** ***reset***.`);
-
-					}
-					index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == command);
-					campFiles.set(`${campaign}.${player}.dexterity[0]`, Number(command));
-					update = campFiles.get(`${campaign}.${player}.scores`);
-					update.splice(index_num, 1);
-					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.reply(`\n>>> ${command} has been assigned to dexterity.`);
-				}else if(constitution.includes(stat)){
-					if(campFiles.get(`${campaign}.${player}.constitution[0]`) > 0){
-						return message.reply(`\n>>> There is already a score placed in ${stat}.` +
-							` You can call back your scores with **/sheet scores** ***reset***.`);
-
-					}
-					index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == command);
-					campFiles.set(`${campaign}.${player}.constitution[0]`, Number(command));
-					update = campFiles.get(`${campaign}.${player}.scores`);
-					update.splice(index_num, 1);
-					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.reply(`\n>>> ${command} has been assigned to constitution.`);
-				}else if(intelligence.includes(stat)){
-					if(campFiles.get(`${campaign}.${player}.intelligence[0]`) > 0){
-						return message.reply(`\n>>> There is already a score placed in intelligence.` +
-							` You can call back your scores with **/sheet scores** ***reset***.`);
-
-					}
-					index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == command);
-					campFiles.set(`${campaign}.${player}.intelligence[0]`, Number(command));
-					update = campFiles.get(`${campaign}.${player}.scores`);
-					update.splice(index_num, 1);
-					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.reply(`\n>>> ${command} has been assigned to intelligence.`);
-				}else if(wisdom.includes(stat)){
-					if(campFiles.get(`${campaign}.${player}.wisdom[0]`) > 0){
-						return message.reply(`\n>>> There is already a score placed in wisdom.` +
-							` You can call back your scores with **/sheet scores** ***reset***.`);
-
-					}
-					index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == command);
-					campFiles.set(`${campaign}.${player}.wisdom[0]`, Number(command));
-					update = campFiles.get(`${campaign}.${player}.scores`);
-					update.splice(index_num, 1);
-					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.reply(`\n>>> ${command} has been assigned to wisdom.`);
-				}else if(charisma.includes(stat)){
-					if(campFiles.get(`${campaign}.${player}.charisma[0]`) > 0){
-						return message.reply(`\n>>> There is already a score placed in charisma.` +
-							` You can call back your scores with **/sheet scores** ***reset***.`);
-
-					}
-					index_num = campFiles.get(`${campaign}.${player}.scores`).findIndex(search => search == command);
-					campFiles.set(`${campaign}.${player}.charisma[0]`, Number(command));
-					update = campFiles.get(`${campaign}.${player}.scores`);
-					update.splice(index_num, 1);
-					campFiles.set(`${campaign}.${player}.scores`, update);
-					return message.reply(`\n>>> ${command} has been assigned to charisma.`);
-				}else{
-					return message.reply(`\n>>> ${stat} is not an ability to place your points in.`);
-				}
-
-			}else{
-				return message.reply(`\n>>> ${command} is not one of your rolled scores.`);
-
-			}
-
-		}
-
+		return;
 	}
 
+	// If the Keyword is Roll
 	if(keyword == `roll`){
 
 		// Local variables
@@ -782,6 +608,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 		return;
 	}
 
+	// If the Keyword is Save
 	if(keyword == `save`){
 
 		// If player scores is not blank then set scoressaved to true
@@ -794,6 +621,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 	}
 
+	// If the Keyword is a Number
 	if(isNaN(keyword) == false){
 
 		// Local Variables
@@ -859,8 +687,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to strength ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> strength\`\`\`` +
-				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> strength` +
+				`\n`.padEnd(40, `- `) +
+				`\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -900,8 +729,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player the the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to dexterity ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> dexterity\`\`\`` +
-				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> dexterity` +
+				`\n`.padEnd(40, `- `) +
+				`\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -941,8 +771,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to constitution ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> constitution\`\`\`` +
-				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> constitution` +
+				`\n`.padEnd(40, `- `) +
+				`\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -982,8 +813,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned
 				message.channel.send(`\n>>> ${keyword} has been assigned to intelligence ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> intelligence\`\`\`` +
-				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> intelligence` +
+				`\n`.padEnd(40, `- `) +
+				`\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -1015,8 +847,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to wisdom ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> wisdom\`\`\`` +
-				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> wisdom` +
+				`\n`.padEnd(40, `- `) +
+				`\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Unassigned Abilities
 				if( campFiles.get(`${campaign}.${player}.strength[0]`) <= 0) str.push(`STR`);
@@ -1064,8 +897,9 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 				// Prompt the player that the stat has been assigned.
 				message.channel.send(`\n>>> ${keyword} has been assigned to charisma ${message.author}.` +
-				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> charisma\`\`\`` +
-				`\n\`\`\`yaml\nUnassigned: ${str.join(`, `)}\`\`\``);
+				`\n\`\`\`yaml\n[${campFiles.get(`${campaign}.${player}.scores`).join(`, `)}] (${keyword}) ==> charisma` +
+				`\n`.padEnd(40, `- `) +
+				`\nUnassigned: ${str.join(`, `)}\`\`\``);
 
 				// Prompt the player if they have assigned all of their scores
 				if(	campFiles.get(`${campaign}.${player}.strength[0]`) > 0 &&
@@ -1092,6 +926,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 
 	}
 
+	// If the Keyword is Lock
 	if(keyword == `lock`){
 
 		// Error Traps
@@ -1182,12 +1017,71 @@ exports.run = async (Discord, bot, config, message, args) => {
 		}
 	}
 
+	// If the Keyword is Reset
 	if(keyword == `reset`){
-		// Its a code block
+
+		// Local Variables
+		let command = args.shift();
+		if(command) command.toLowerCase().trim();
+
+		let update = campFiles.get(`${campaign}.${player}.scores`);
+
+		// If There is no Argument after Reset
+		if(!command || command == ``){
+
+			// Error Traps
+			if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
+				return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet scores** ***now***`);
+
+			}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
+				return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet scores** ***save***`);
+
+			}
+
+			if(	campFiles.get(`${campaign}.${player}.strength[0]`) <= 0 &&
+					campFiles.get(`${campaign}.${player}.dexterity[0]`) <= 0 &&
+					campFiles.get(`${campaign}.${player}.constitution[0]`) <= 0 &&
+					campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0 &&
+					campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0 &&
+					campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0){
+				return message.reply(`\n>>> None of your abilities have an ability score assigned to them. There's no need to reset.`);
+
+			}
+
+			// Resetting Ability Scores
+			if(campFiles.get(`${campaign}.${player}.strength[0]`) > 0){
+				update.push(campFiles.get(`${campaign}.${player}.strength[0]`));
+				campFiles.set(`${campaign}.${player}.strength[0]`, 0);
+			}
+			if(campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0){
+				update.push(campFiles.get(`${campaign}.${player}.dexterity[0]`));
+				campFiles.set(`${campaign}.${player}.dexterity[0]`, 0);
+			}
+			if(campFiles.get(`${campaign}.${player}.constitution[0]`) > 0){
+				update.push(campFiles.get(`${campaign}.${player}.constitution[0]`));
+				campFiles.set(`${campaign}.${player}.constitution[0]`, 0);
+			}
+			if(campFiles.get(`${campaign}.${player}.intelligence[0]`) > 0){
+				update.push(campFiles.get(`${campaign}.${player}.intelligence[0]`));
+				campFiles.set(`${campaign}.${player}.intelligence[0]`, 0);
+			}
+			if(campFiles.get(`${campaign}.${player}.wisdom[0]`) > 0){
+				update.push(campFiles.get(`${campaign}.${player}.wisdom[0]`));
+				campFiles.set(`${campaign}.${player}.wisdom[0]`, 0);
+			}
+			if(campFiles.get(`${campaign}.${player}.charisma[0]`) > 0){
+				update.push(campFiles.get(`${campaign}.${player}.charisma[0]`));
+				campFiles.set(`${campaign}.${player}.charisma[0]`, 0);
+			}
+
+			campFiles.set(`${campaign}.${player}.scores`, update);
+
+			return message.reply(`\n>>> Ability scores have been returned to the roll the list.`);
+		}
 	}
 
 	// If the Keyword is Choice
-	if(keyword == `choice` || keyword == `ch`){
+	if(keyword == `choice`){
 
 		// Local Variables
 		let selection   = args.join(` `).toLowerCase().trim();
@@ -1436,69 +1330,6 @@ exports.run = async (Discord, bot, config, message, args) => {
 		if(selection == `` || !selection) return message.channel.send(`> Please specify a choice from your list of options.`);
 
 		return;
-	}
-
-	// If the Keyword is Reset
-	if(keyword == `reset` || keyword == `rs`){
-
-		// Local Variables
-		let command = args.shift();
-		if(command) command.toLowerCase().trim();
-
-		let update = campFiles.get(`${campaign}.${player}.scores`);
-
-		// If There is no Argument after Reset
-		if(!command || command == ``){
-
-			// Error Traps
-			if(campFiles.get(`${campaign}.${player}.scores`) == undefined && campFiles.get(`${campaign}.${player}.scoressaved`) == false || campFiles.get(`${campaign}.${player}.scores`).length <= 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-				return message.reply(`\n>>> You didn't roll any ability scores. Roll a set with **/sheet scores** ***now***`);
-
-			}else if(campFiles.get(`${campaign}.${player}.scores`).length > 0 && campFiles.get(`${campaign}.${player}.scoressaved`) == false){
-				return message.reply(`\n>>> You didn't save your ability scores. Save the set with **/sheet scores** ***save***`);
-
-			}
-
-			if(	campFiles.get(`${campaign}.${player}.strength[0]`) <= 0 &&
-					campFiles.get(`${campaign}.${player}.dexterity[0]`) <= 0 &&
-					campFiles.get(`${campaign}.${player}.constitution[0]`) <= 0 &&
-					campFiles.get(`${campaign}.${player}.intelligence[0]`) <= 0 &&
-					campFiles.get(`${campaign}.${player}.wisdom[0]`) <= 0 &&
-					campFiles.get(`${campaign}.${player}.charisma[0]`) <= 0){
-				return message.reply(`\n>>> None of your abilities have an ability score assigned to them. There's no need to reset.`);
-
-			}
-
-			// Resetting Ability Scores
-			if(campFiles.get(`${campaign}.${player}.strength[0]`) > 0){
-				update.push(campFiles.get(`${campaign}.${player}.strength[0]`));
-				campFiles.set(`${campaign}.${player}.strength[0]`, 0);
-			}
-			if(campFiles.get(`${campaign}.${player}.dexterity[0]`) > 0){
-				update.push(campFiles.get(`${campaign}.${player}.dexterity[0]`));
-				campFiles.set(`${campaign}.${player}.dexterity[0]`, 0);
-			}
-			if(campFiles.get(`${campaign}.${player}.constitution[0]`) > 0){
-				update.push(campFiles.get(`${campaign}.${player}.constitution[0]`));
-				campFiles.set(`${campaign}.${player}.constitution[0]`, 0);
-			}
-			if(campFiles.get(`${campaign}.${player}.intelligence[0]`) > 0){
-				update.push(campFiles.get(`${campaign}.${player}.intelligence[0]`));
-				campFiles.set(`${campaign}.${player}.intelligence[0]`, 0);
-			}
-			if(campFiles.get(`${campaign}.${player}.wisdom[0]`) > 0){
-				update.push(campFiles.get(`${campaign}.${player}.wisdom[0]`));
-				campFiles.set(`${campaign}.${player}.wisdom[0]`, 0);
-			}
-			if(campFiles.get(`${campaign}.${player}.charisma[0]`) > 0){
-				update.push(campFiles.get(`${campaign}.${player}.charisma[0]`));
-				campFiles.set(`${campaign}.${player}.charisma[0]`, 0);
-			}
-
-			campFiles.set(`${campaign}.${player}.scores`, update);
-
-			return message.reply(`\n>>> Ability scores have been returned to the roll the list.`);
-		}
 	}
 
 	return;
