@@ -1332,6 +1332,11 @@ exports.run = async (Discord, bot, config, message, args) => {
 		return;
 	}
 
+	// If the Keyword is Approve
+	if(keyword == `approve`){
+		// Some code here
+	}
+
 	return;
 }
 
