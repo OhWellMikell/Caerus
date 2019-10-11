@@ -42,6 +42,8 @@ exports.run = async (Discord, bot, config, message, args) => {
 		let name = args.join(` `).toLowerCase().trim();
 		try{
 			require(`../../files/races/${name}.json`);
+			// require(`../../files/classes/${name}.json`);
+
 			campFiles.set(`${campaign}.styleselection`, `${name}`);
 			let spell = name.toLowerCase().split(``);
 			spell = spell[0].toUpperCase().toString() + spell.slice(1).join(``);

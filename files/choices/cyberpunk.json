@@ -1,0 +1,24 @@
+{
+	"barbarian": {
+	  "barbarian equipment choice 1": {
+			"type": "equipment",
+			"prompt": "Barbarian players have a choice of equipment between a Battleaxe or any Martial Melee Weapon. Use /sheet choice <option> to select one of your options and consume the \"Equipment Choice 1\" that is in your features section.",
+			"options": ["Battleaxe", "Flail", "Glaive", "Greataxe", "Greatsword", "Halberd", "Lance", "Longsword", "Maul", "Morningstar", "Pike", "Rapier", "Scimitar", "Shortsword", "Trident", "War Pick", "Warhammer", "Whip"]
+	  },
+		"barbarian equipment choice 2": {
+			"type": "equipment",
+			"prompt": "Barbarian players have an additional choice of equipment between 2 Handaxes or any Simple Melee Weapon.\nBe sure to specify \"2 Handaxe\" when making your /sheet choice or else it might be confused with the Simple Melee option of just one! As mentioned, use /sheet choice <option> to select your option and consume the \"Equipment Choice 2\" that is in your features section.",
+			"options": ["2 Handaxe", "Club", "Dagger", "Greatclub", "Handaxe", "Javelin", "Light Hammer", "Mace", "Quarterstaff", "Sickle", "Spear", "Light Crossbow", "Dart", "Shortbow", "Sling"]
+	  },
+		"barbarian skill choice 1": {
+			"type": "skill",
+			"prompt": "Barbarian players have a choice of what skill they want to be proficient in. Use /sheet choice <option> to select your first skill and consume the \"Skill Choice 1\" that is in your features section.",
+			"options": ["Animal Handling",  "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
+	  },
+		"barbarian skill choice 2": {
+			"type": "skill",
+			"prompt": "Barbarian players have an additional choice of what skill they want to be proficient in. Use /sheet choice <option> to select your first skill and consume the \"Skill Choice 2\" that is in your features section.",
+			"options": ["Animal Handling",  "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
+	  }
+	}
+}
