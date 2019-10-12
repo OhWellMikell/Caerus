@@ -658,7 +658,7 @@ exports.run = async (Discord, bot, config, message, args) => {
 			let charisma     = [`cha`,`charisma`];
 			let index_num;
 			let update;
-			let str = [];
+			let str = [` `];
 
 			// Check which stat has been specified. Assign the keyword as the stat.
 			if(strength.includes(stat)){
@@ -950,6 +950,11 @@ exports.run = async (Discord, bot, config, message, args) => {
 				return message.reply(`\n>>> Your race and class are not from the same style of campaign. The style is currently ${fileselect}.`)
 
 			}
+
+			// Locking Background
+			campFiles.set(`${campaign}.${player}.backgroundlocked`, true);
+			return message.reply(`\n>>> Your race and class have been saved and locked.`);
+
 		}
 
 		if(command == `scores`){

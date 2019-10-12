@@ -47,7 +47,8 @@ exports.run = async (Discord, bot, config, message, args) => {
 				scores: [],
 				scoressaved: false,
 				scoreslocked: false,
-				rolls: 2
+				rolls: 2,
+				backgroundlocked: false
 			}
 		);
 
